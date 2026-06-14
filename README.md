@@ -14,7 +14,12 @@ Naturheilpraxis Detlef Rathmer in Billerbeck.
 | `ueber-mich.html` | Über mich |
 | `kontakt.html` | Kontakt (inkl. Karte & Impressum-Platzhalter) |
 
-Assets liegen unter `assets/` (`css/`, `js/`, `img/`).
+Assets liegen unter `assets/`:
+
+- `assets/css/` — Stylesheets (`style.css`)
+- `assets/js/` — Skripte (`main.js`)
+- `assets/img/fotos/` — Fotos (Portraits, Praxis, Stimmungsbilder)
+- `assets/img/illustrationen/` — abstrakte Illustrationen
 
 ## Lokal ansehen
 Einfach `index.html` im Browser öffnen — oder einen kleinen lokalen Server starten:
