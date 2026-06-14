@@ -14,10 +14,10 @@ Enneagramm-Coaching und psychologische Beratung. Querverlinkt mit dem Verlagshau
 - Lokal starten: `python3 -m http.server 8081`.
 
 ## Bilder — WICHTIG
-- Die Seite verwendet nur **~14 Bilder direkt in `assets/img/`** (Porträts, Illustrationen, Praxis).
+- Die Seite verwendet ihre Bilder aus **`assets/img/fotos/`** (Porträts, Praxis) und **`assets/img/illustrationen/`** (abstrakte Illustrationen).
 - Der alte WordPress-Archivordner (`assets/img/archiv/`, ~1.461 Bilder, 2013–2018) wurde **entfernt**,
   weil er nirgends verwendet wurde und jeden Deploy aufblähte.
-  Die Original-Archivbilder liegen gesichert unter **`~/Desktop/naturheilpraxis-archiv-bilder/`**.
+  Die Original-Archivbilder liegen gesichert unter **`~/Desktop/Naturheilpraxis/naturheilpraxis-archiv-bilder/`**.
 - **Keine alten Archiv-/Massenbilder zurück ins Repo legen.**
 
 ## Rechtliches (vorhanden, Pflichtangaben abgedeckt)
@@ -26,12 +26,12 @@ Enneagramm-Coaching und psychologische Beratung. Querverlinkt mit dem Verlagshau
   - **Heilpraktiker-Pflichtangaben**: Berufsbezeichnung „Heilpraktiker", Erlaubnis nach **§ 1 HeilprG**
     (ohne Bestallung), **Erlaubnisbehörde Gesundheitsamt Recklinghausen**, Kurt-Schumacher-Allee 1, 45657 Recklinghausen
   - Heilkunde-Hinweis (kein Heilversprechen) + Heilpraktiker-AGB (§§ 1–11)
-- `datenschutz.html` (Art. 13 DSGVO: Netlify, Google Fonts, YouTube via `youtube-nocookie.com`, OpenStreetMap)
+- `datenschutz.html` (Art. 13 DSGVO: GitHub Pages, Google Fonts, YouTube via `youtube-nocookie.com`, OpenStreetMap)
 - Inhaltsregel: **keine Heilversprechen**; Inhalte ersetzen keine ärztliche Behandlung.
 - Hinweis: solide Standardtexte, **kein Ersatz für eine anwaltliche Prüfung**.
 
-## Deploy (Netlify) — WICHTIG für Build-Minuten
-- Gehostet auf **Netlify**, deployt automatisch bei `git push` auf `main`. **Kein Build-Befehl**.
-- Netlify-Gratistarif: **300 Build-Minuten/Monat** (Reset monatlich).
-- **Änderungen bündeln und nur EINMAL pro Arbeitsblock pushen.**
-- Repo wurde **squash-bereinigt** und vom Archivordner befreit → Deploy-Klon nur noch ~3,6 MB, Deploys sind günstig. **So schlank halten.**
+## Deploy (GitHub Pages)
+- Gehostet auf **GitHub Pages** (Repo `Dettifossi/naturheilpraxis-rathmer`), Domain über die `CNAME`-Datei (`www.psychologische-homoeopathie.de`). Deployt automatisch bei `git push` auf `main`. **Kein Build-Befehl**.
+- GitHub Pages ist kostenlos und hat **keine monatliche Build-Minuten-Grenze** (anders als Netlify). Frühere parallele Netlify-Anbindung wurde abgeklemmt; DNS zeigt auf GitHub Pages.
+- Repo wurde **squash-bereinigt** und vom ungenutzten Archivordner befreit → Deploy-Klon nur ~3,6 MB. **So schlank halten, keine Massenbilder committen.**
+- `robots.txt` + `sitemap.xml` vorhanden.
