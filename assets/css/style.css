@@ -382,6 +382,40 @@ p  { margin: 0 0 1.1em; color: var(--ink-soft); }
   opacity: .8;
 }
 
+/* ---------- Testimonials grid ---------- */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.testimonial-card {
+  background: var(--cream);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--sage-light);
+  padding: 28px 28px 24px;
+  box-shadow: var(--shadow-sm);
+  margin: 0;
+}
+.testimonial-card p {
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: .8em;
+}
+.testimonial-card cite {
+  display: block;
+  font-style: normal;
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--sage-dark);
+}
+@media (max-width: 720px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
 /* ---------- Section heading helper ---------- */
 .sec-head { max-width: 640px; margin: 0 auto clamp(36px, 5vw, 56px); text-align:center; }
 .sec-head.left { margin-left:0; text-align:left; }
