@@ -229,27 +229,29 @@
     </section>
     <script>
     (function(){
+      var ids = [
+        'K_0iOB15sqg','yKxFFJ6FDQ8','HZdmfstuV2I','poZzcixsQ5c','4hzwhyYktVc',
+        'wNdIpxjlgIM','eBM0aZwL2fI','pr93s6pd8kg','15L-6_fWMu0','H7p2laWNCcI',
+        'yPN9EfpLSKQ','6irmWXADXHo','pvEbIPlxKWU','oRBhQDKMwpA','oU5fBG0vbZc',
+        'Chg09fS8qoc','gVZ2sZgaMrs','emehFcSWRE8','8n7s1dnFJU8','oEs0VlT7WfI',
+        'gIBDTkAmzIg'
+      ];
       var nav = document.getElementById('hf-nav');
       var player = document.getElementById('hf-player');
-      var base = 'https://www.youtube-nocookie.com/embed/videoseries?list=PLDDseEKkCveWTa7QLd0vKYVoFCSMh0-eq&rel=0&autoplay=1&index=';
-      var active = 0;
       var btnStyle = 'display:inline-flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:50%;border:2px solid var(--gold,#b89a5a);background:transparent;color:var(--ink,#2c2a27);font-family:inherit;font-size:0.85rem;font-weight:600;cursor:pointer;transition:background .18s,color .18s;';
       var activeStyle = 'background:var(--gold,#b89a5a);color:#fff;border-color:var(--gold,#b89a5a);';
-      for(var i=0;i<21;i++){
-        (function(idx){
-          var btn = document.createElement('button');
-          btn.textContent = idx+1;
-          btn.setAttribute('style', btnStyle + (idx===0 ? activeStyle : ''));
-          btn.setAttribute('aria-label','Video '+(idx+1)+' abspielen');
-          btn.addEventListener('click', function(){
-            nav.querySelectorAll('button').forEach(function(b){ b.setAttribute('style', btnStyle); });
-            btn.setAttribute('style', btnStyle + activeStyle);
-            player.src = base + idx;
-            active = idx;
-          });
-          nav.appendChild(btn);
-        })(i);
-      }
+      ids.forEach(function(id, idx){
+        var btn = document.createElement('button');
+        btn.textContent = idx+1;
+        btn.setAttribute('style', btnStyle + (idx===0 ? activeStyle : ''));
+        btn.setAttribute('aria-label','Video '+(idx+1)+' abspielen');
+        btn.addEventListener('click', function(){
+          nav.querySelectorAll('button').forEach(function(b){ b.setAttribute('style', btnStyle); });
+          btn.setAttribute('style', btnStyle + activeStyle);
+          player.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+        });
+        nav.appendChild(btn);
+      });
     })();
     </script>
 
