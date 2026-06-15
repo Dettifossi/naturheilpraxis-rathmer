@@ -195,6 +195,116 @@
       </div>
     </section>
 
+    <!-- ===== Patientenstimmen ===== -->
+    <style>
+      .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: clamp(28px, 4vw, 44px); }
+      .review-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 26px 24px; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+      .review-stars { color: #E0A82E; letter-spacing: 2px; font-size: 1.05rem; margin-bottom: 12px; }
+      .review-card blockquote { margin: 0 0 16px; font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; line-height: 1.6; color: var(--ink); font-style: italic; }
+      .review-card figcaption { margin-top: auto; font-size: .9rem; font-weight: 600; color: var(--sage-dark); letter-spacing: .02em; }
+      .reviews-foot { text-align: center; margin-top: clamp(28px, 4vw, 40px); }
+      @media (max-width: 940px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 560px) { .reviews-grid { grid-template-columns: 1fr; } }
+    </style>
+    <section class="section section--paper">
+      <div class="container">
+        <div class="sec-head reveal" style="text-align:center;">
+          <p class="eyebrow">Patientenstimmen</p>
+          <h2>Das sagen meine Patientinnen und Patienten</h2>
+        </div>
+        <div class="reviews-grid reveal">
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>von herzen gerne empfehle ich dethlef rathmer — sein grosses wissen, sein tiefes verständnis für den menschen und seine einfühlsame art und weise zu kommunizieren ist wundervoll … ein riesiges geschenk für bewusste menschen. danke</blockquote>
+            <figcaption>— Jeannine G.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Herrn Rathmer kann ich nur empfehlen. Er bringt einen großen, breitgefächerten Erfahrungsschatz mit und ist sehr authentisch! Danke für die tolle, einmalige Enneagramm / Homöopathie Beratung mit Tiefgang und Spaß dabei. Gute Mischung!</blockquote>
+            <figcaption>— Nadine d. J.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Herr Rathmer ist äußerst kompetent und sehr einfühlsam, jederzeit erreichbar. Man merkt, dass es ihm ein Anliegen ist, seinen Patienten zu helfen und nicht nur einen Job zu machen. Vielen Dank! Chapeau!!!</blockquote>
+            <figcaption>— Susanne W.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Ein super Heilpraktiker, sehr engagiert, extrem kompetent, einfühlsam und jederzeit für seine Patienten erreichbar. Ich bin begeistert!</blockquote>
+            <figcaption>— Patientin (via Jameda)</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Wie ein Maler mit drei Farben alle Farbnuancen mischen kann, so reduzierte Herr Rathmer im Umkehrschluss meine vielfältigen Wehwehchen auf das Wesentliche …</blockquote>
+            <figcaption>— Georg</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Habe schon in einige Bücher über Homöopathie geschaut, aber erst im ausführlichen Gespräch mit Herrn Rathmer ist mir vieles klarer geworden. Vielen Dank für die Geduld bei der Beantwortung meiner Fragen.</blockquote>
+            <figcaption>— Catherine B.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Kompetent, menschlich, zuverlässig.</blockquote>
+            <figcaption>— Sabine R.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Herr Rathmer ist ein brillanter Kenner der Gemütsorientierten Homöopathie nach Sehgal. Des Weiteren führt er die von Dr. med. Hegemann entwickelte Enneagramm-Methode auf einzigartige Weise fort …</blockquote>
+            <figcaption>— Hans-Hermann S.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Da unserer Familie seit Jahren das Enneagramm bekannt ist, war es für uns ein großer Gewinn, uns durch Herrn Rathmer homöopathisch behandeln zu lassen …</blockquote>
+            <figcaption>— Heike B.-B.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Ein kluger Mann mit intelligenten Fragen und natürlich auch Antworten!!! Zum Glück auch in der Ferne jederzeit erreichbar! Immer gern wieder!</blockquote>
+            <figcaption>— Brigitta (Berlin)</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Ich kenne Herrn Rathmer seit vielen Jahren. Wenn es mir schlecht geht und ich ihn dringend brauche, hat er immer kurzfristig Zeit für mich.</blockquote>
+            <figcaption>— Joker (Berlin)</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Ich schätze Herrn Rathmer als kompetenten Kenner des menschlichen Organismus sehr. Da er sich gut und ausführlich mit seinen Patienten befasst …</blockquote>
+            <figcaption>— Heike M.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Herr Detlef Rathmer aus Billerbeck ist telefonisch gut erreichbar — m. E. in chronischen Fällen eine wichtige Voraussetzung für eine erfolgreiche Behandlung …</blockquote>
+            <figcaption>— Patient (via Jameda)</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Nur die beste Erfahrung.</blockquote>
+            <figcaption>— Patient (via golocal)</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Ein sehr kompetenter und freundlicher Heilpraktiker. Herr Rathmer nimmt sich viel Zeit für seine Patienten und versucht mit seinem reichhaltigen Wissen wirklich zu helfen …</blockquote>
+            <figcaption>— Thorsten K.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Nach langer Suche endlich einen guten Heilpraktiker gefunden! Herr Rathmer ist sehr erfahren, kompetent und sympathisch. Er nimmt sich sehr viel Zeit. Ich habe mich sehr gut aufgehoben gefühlt.</blockquote>
+            <figcaption>— Birgit v. W.</figcaption>
+          </figure>
+          <figure class="review-card">
+            <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <blockquote>Erfahrener Heilpraktiker, welcher auch als Autor bekannt ist, positive Ausstrahlung. Neben klassischer Homöopathie betreibt Herr Rathmer auch die Enneagramm-Homöopathie …</blockquote>
+            <figcaption>— Marc A.</figcaption>
+          </figure>
+        </div>
+        <div class="reviews-foot reveal">
+          <a class="btn btn--ghost" href="https://g.page/r/naturheilpraxis-rathmer/review" target="_blank" rel="noopener">Auf Google bewerten</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== CTA ===== -->
     <section class="section section--tint">
       <div class="container">
