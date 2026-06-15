@@ -214,44 +214,82 @@
           <h2>Geniale Fakten zur Homöopathie</h2>
           <p style="color:var(--ink-soft); max-width:54ch;">21 Kurzvideos aus meiner Naturheilpraxis — kompaktes Wissen zu Wirkweise, Geschichte und Anwendung der Homöopathie. Wählen Sie ein Video direkt an:</p>
         </div>
-        <!-- Video-Nummernauswahl -->
-        <div id="hf-nav" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.25rem;">
-        </div>
-        <div class="reveal" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow);">
-          <iframe id="hf-player"
-            src="https://www.youtube-nocookie.com/embed/videoseries?list=PLDDseEKkCveWTa7QLd0vKYVoFCSMh0-eq&index=0&rel=0&enablejsapi=1"
-            title="Geniale Fakten zur Homöopathie — Detlef Rathmer"
-            style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+        <div id="hf-nav" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.25rem;"></div>
+        <div style="max-width:340px; margin:0 auto; border-radius:16px; overflow:hidden; box-shadow:0 8px 32px rgba(44,42,39,0.18);">
+          <div style="position:relative; padding-bottom:177.78%; height:0; overflow:hidden;">
+            <iframe id="hf-player"
+              src="https://www.youtube-nocookie.com/embed/gIBDTkAmzIg?rel=0"
+              title="Geniale Fakten zur Homöopathie — Detlef Rathmer"
+              style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Video-Reihe: Gesundheitstipps -->
+    <section class="section section--tint">
+      <div class="container">
+        <div class="sec-head reveal" style="margin-bottom:2rem;">
+          <p class="eyebrow">Video-Reihe</p>
+          <h2>Gesundheitstipps aus der Naturheilpraxis</h2>
+          <p style="color:var(--ink-soft); max-width:54ch;">Kurzvideos mit praktischen Tipps zu Naturheilmitteln, Hausmitteln und häufigen Beschwerden. Wählen Sie ein Video direkt an:</p>
+        </div>
+        <div id="gt-nav" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.25rem;"></div>
+        <div style="max-width:340px; margin:0 auto; border-radius:16px; overflow:hidden; box-shadow:0 8px 32px rgba(44,42,39,0.18);">
+          <div style="position:relative; padding-bottom:177.78%; height:0; overflow:hidden;">
+            <iframe id="gt-player"
+              src="https://www.youtube-nocookie.com/embed/26BDVNaUooA?rel=0"
+              title="Gesundheitstipps aus der Naturheilpraxis Rathmer"
+              style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <script>
     (function(){
-      var ids = [
-        'gIBDTkAmzIg','oEs0VlT7WfI','8n7s1dnFJU8','emehFcSWRE8','gVZ2sZgaMrs',
-        'Chg09fS8qoc','oU5fBG0vbZc','oRBhQDKMwpA','pvEbIPlxKWU','6irmWXADXHo',
-        'yPN9EfpLSKQ','H7p2laWNCcI','15L-6_fWMu0','pr93s6pd8kg','eBM0aZwL2fI',
-        'wNdIpxjlgIM','4hzwhyYktVc','poZzcixsQ5c','HZdmfstuV2I','yKxFFJ6FDQ8',
-        'K_0iOB15sqg'
-      ];
-      var nav = document.getElementById('hf-nav');
-      var player = document.getElementById('hf-player');
       var btnStyle = 'display:inline-flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:50%;border:2px solid var(--gold,#b89a5a);background:transparent;color:var(--ink,#2c2a27);font-family:inherit;font-size:0.85rem;font-weight:600;cursor:pointer;transition:background .18s,color .18s;';
       var activeStyle = 'background:var(--gold,#b89a5a);color:#fff;border-color:var(--gold,#b89a5a);';
-      ids.forEach(function(id, idx){
-        var btn = document.createElement('button');
-        btn.textContent = idx+1;
-        btn.setAttribute('style', btnStyle + (idx===0 ? activeStyle : ''));
-        btn.setAttribute('aria-label','Video '+(idx+1)+' abspielen');
-        btn.addEventListener('click', function(){
-          nav.querySelectorAll('button').forEach(function(b){ b.setAttribute('style', btnStyle); });
-          btn.setAttribute('style', btnStyle + activeStyle);
-          player.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+
+      function buildNav(navId, playerId, ids) {
+        var nav = document.getElementById(navId);
+        var player = document.getElementById(playerId);
+        ids.forEach(function(id, idx) {
+          var btn = document.createElement('button');
+          btn.textContent = idx + 1;
+          btn.setAttribute('style', btnStyle + (idx === 0 ? activeStyle : ''));
+          btn.setAttribute('aria-label', 'Video ' + (idx + 1) + ' abspielen');
+          btn.addEventListener('click', function() {
+            nav.querySelectorAll('button').forEach(function(b) { b.setAttribute('style', btnStyle); });
+            btn.setAttribute('style', btnStyle + activeStyle);
+            player.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+          });
+          nav.appendChild(btn);
         });
-        nav.appendChild(btn);
-      });
+      }
+
+      buildNav('hf-nav', 'hf-player', [
+        'gIBDTkAmzIg','8n7s1dnFJU8','emehFcSWRE8','gVZ2sZgaMrs','Chg09fS8qoc',
+        'oU5fBG0vbZc','oRBhQDKMwpA','pvEbIPlxKWU','K_0iOB15sqg','6irmWXADXHo',
+        'yPN9EfpLSKQ','H7p2laWNCcI','15L-6_fWMu0','pr93s6pd8kg','eBM0aZwL2fI',
+        'wNdIpxjlgIM','4hzwhyYktVc','poZzcixsQ5c','HZdmfstuV2I','yKxFFJ6FDQ8',
+        'oEs0VlT7WfI'
+      ]);
+
+      buildNav('gt-nav', 'gt-player', [
+        '26BDVNaUooA','BVPBel7ChKA','5whteqhjlEI','Oe-NSHIsNI8','1g3VFG_UTuA',
+        '-BDSb6jH8fg','f_I7g8jbI4A','FHvQAqWdovw','I0_Tcy2CKhU','yqx_AgKYMM8',
+        'LktZ8ZwhQPY','5XcRcGx9CHs','VB48nSZMMYo','g0uJNXTm83s','hH9BTJXb9Ls',
+        '7msWvqXOuu4','cffrEC8ZUnc','46QzANCMiMU','13e4NKkA1T4','W0e_8ooUJMA',
+        'eRBWfjI2TdI','jrXJgotNUJM','2b8v-xoaR0M','vSWyIqgu82E','0XMjUPMfdxU',
+        '734sQf5prFU','tEueEpIUOYk','t6MPCOc64Cg','9Way1cmAovc','a7XunGFZcJM',
+        '9mgG1ml1cFY','Ny-dvIZP09A','zr5uMzoylN0','tdp7m-rAilM','ETS8Tlj9yOY',
+        'syBpqWlH5U0','Q99xB5qZx8o','9gbbyoXy6GE','y1HoBN-vR74','JBVSWCOAbB8'
+      ]);
     })();
     </script>
 
