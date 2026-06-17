@@ -64,22 +64,72 @@
     </section>
 
     <!-- Samuel Hahnemann -->
+    <style>
+      .hahnemann-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,4vw,56px); align-items: start; margin-top: clamp(32px,5vw,56px); }
+      .hahnemann-gallery__portrait img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); display: block; }
+      .hahnemann-gallery__slides { display: flex; flex-direction: column; gap: 18px; }
+      .hg-slideshow { position: relative; border-radius: var(--radius); overflow: hidden; background: #111; aspect-ratio: 4/5; }
+      .hg-slideshow__slide { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease; }
+      .hg-slideshow__slide.active { opacity: 1; }
+      .hg-slideshow__slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .hg-caption { font-size: .82rem; color: var(--ink-soft); font-style: italic; text-align: center; }
+      .hg-dots { display: flex; gap: 8px; justify-content: center; }
+      .hg-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); border: none; cursor: pointer; padding: 0; transition: background .2s; }
+      .hg-dot.active { background: var(--sage); }
+      @media (max-width: 680px) { .hahnemann-gallery { grid-template-columns: 1fr; } }
+    </style>
     <section class="section section--paper">
       <div class="container">
-        <div class="botanical-split botanical-split--flip">
-          <div class="botanical-split__art reveal">
+        <div class="sec-head reveal" style="text-align:left; max-width:680px;">
+          <p class="eyebrow">Die Wurzeln der Homöopathie</p>
+          <h2>Samuel Hahnemann — Begründer einer neuen Heilkunst</h2>
+        </div>
+        <div class="botanical-split reveal" style="margin-top:clamp(28px,4vw,48px);">
+          <div class="botanical-split__art">
             <img src="assets/img/fotos/hahnemann-portrait.jpg"
                  alt="Samuel Hahnemann — Begründer der Homöopathie (Gemälde, gemeinfrei)"
-                 loading="lazy">
+                 loading="lazy" style="border-radius:var(--radius); box-shadow:var(--shadow);">
           </div>
-          <div class="botanical-split__text prose reveal">
-            <p class="eyebrow">Die Wurzeln der Homöopathie</p>
-            <h2>Samuel Hahnemann — Begründer einer neuen Heilkunst</h2>
+          <div class="botanical-split__text prose">
             <p>Die Homöopathie wurde Ende des 18. Jahrhunderts von dem deutschen Arzt <strong>Samuel Hahnemann</strong> (1755–1843) begründet. Hahnemann war ein außergewöhnlicher Denker: Mediziner, Chemiker und Sprachgelehrter zugleich — und zutiefst unzufrieden mit der Medizin seiner Zeit, die ihren Patienten oft mehr schadete als nutzte.</p>
             <p>Auf der Suche nach einer sanfteren, wirksameren Heilkunde stieß er auf das Grundprinzip, das seither den Kern der Homöopathie bildet: <em>Similia similibus curentur</em> — Ähnliches werde durch Ähnliches geheilt. Ein Mittel, das bei einem gesunden Menschen bestimmte Symptome hervorruft, kann bei einem kranken Menschen dieselben Symptome heilen — vorausgesetzt, es wird individuell und präzise gewählt.</p>
             <p>Dieses Mittel nennt Hahnemann das <strong>Similimum</strong> — das ähnlichste Mittel, das es für diesen einen Menschen gibt. Es zu finden, ist die eigentliche Kunst der Homöopathie: Sie erfordert eine genaue Kenntnis des Patienten, seiner Geschichte, seines Wesens — und ein tiefes Wissen über die Wirkungsweise der Heilmittel.</p>
             <p>Hahnemanns Werk, der <em>Organon der Heilkunst</em> (1810), ist bis heute das Grundlagenwerk der klassischen Homöopathie — und Ausgangspunkt meiner eigenen Arbeit als Therapeut und Autor.</p>
           </div>
+        </div>
+
+        <!-- Grab-Galerie -->
+        <div class="reveal" style="margin-top:clamp(40px,6vw,64px); max-width:480px; margin-left:auto; margin-right:auto;">
+          <div class="hg-slideshow" id="hg">
+            <div class="hg-slideshow__slide active">
+              <img src="assets/img/fotos/hahnemann-grab-1.jpg" alt="Grabmal Samuel Hahnemann, Père Lachaise, Paris" loading="lazy">
+            </div>
+            <div class="hg-slideshow__slide">
+              <img src="assets/img/fotos/hahnemann-grab-2.jpg" alt="Grabmal Samuel Hahnemann, Père Lachaise, Paris" loading="lazy">
+            </div>
+            <div class="hg-slideshow__slide">
+              <img src="assets/img/fotos/hahnemann-grab-3.jpg" alt="Grabmal Samuel Hahnemann, Père Lachaise, Paris" loading="lazy">
+            </div>
+          </div>
+          <p class="hg-caption" style="margin-top:10px;">Grabmal von Samuel Hahnemann auf dem Père Lachaise, Paris — aufgenommen von Detlef Rathmer</p>
+          <div class="hg-dots" style="margin-top:12px;" id="hg-dots">
+            <button class="hg-dot active" data-i="0" aria-label="Foto 1"></button>
+            <button class="hg-dot" data-i="1" aria-label="Foto 2"></button>
+            <button class="hg-dot" data-i="2" aria-label="Foto 3"></button>
+          </div>
+          <script>
+            (function(){
+              var slides = document.querySelectorAll('#hg .hg-slideshow__slide');
+              var dots = document.querySelectorAll('#hg-dots .hg-dot');
+              var cur = 0;
+              function show(i){
+                slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+                cur = i; slides[cur].classList.add('active'); dots[cur].classList.add('active');
+              }
+              dots.forEach(function(d){ d.addEventListener('click', function(){ show(+this.dataset.i); }); });
+              setInterval(function(){ show((cur+1) % slides.length); }, 4000);
+            })();
+          </script>
         </div>
       </div>
     </section>
