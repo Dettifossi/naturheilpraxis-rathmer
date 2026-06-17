@@ -585,3 +585,40 @@ p  { margin: 0 0 1.1em; color: var(--ink-soft); }
   .site-switcher { margin-left: 0.5rem; }
   .site-switcher__card { right: 0; width: min(220px, calc(100vw - 2rem)); }
 }
+
+/* ---------- Bewegungsanimationen ---------- */
+
+/* 1. Hero-Blob: sanftes Driften */
+@keyframes blobDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(-18px, 14px) scale(1.06); }
+  66%  { transform: translate(12px, -10px) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+.hero__blob {
+  animation: blobDrift 14s ease-in-out infinite;
+}
+
+/* 2. Badge: dezentes Pulsen */
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(138,154,120,.18); }
+  50%       { box-shadow: 0 6px 24px rgba(138,154,120,.38), 0 0 0 6px rgba(138,154,120,.08); }
+}
+.hero__badge {
+  animation: badgePulse 3.6s ease-in-out infinite;
+}
+
+/* 3. Karten-Hover: grüner Akzentschimmer */
+.card:hover {
+  box-shadow: 0 12px 32px rgba(138,154,120,.22), 0 2px 8px rgba(138,154,120,.14);
+  border-top-color: var(--sage);
+}
+
+/* 4. Zitat-Anführungszeichen: sanftes Einatmen */
+@keyframes markBreathe {
+  0%, 100% { opacity: .13; transform: scaleX(1); }
+  50%       { opacity: .22; transform: scaleX(1.04); }
+}
+.mark {
+  animation: markBreathe 5s ease-in-out infinite;
+}
