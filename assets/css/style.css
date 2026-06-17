@@ -588,37 +588,48 @@ p  { margin: 0 0 1.1em; color: var(--ink-soft); }
 
 /* ---------- Bewegungsanimationen ---------- */
 
-/* 1. Hero-Blob: sanftes Driften */
+/* 1. Hero-Blob: deutlicheres Driften */
 @keyframes blobDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(-18px, 14px) scale(1.06); }
-  66%  { transform: translate(12px, -10px) scale(0.96); }
-  100% { transform: translate(0, 0) scale(1); }
+  0%   { transform: translate(0, 0) scale(1); opacity: .44; }
+  33%  { transform: translate(-40px, 30px) scale(1.14); opacity: .55; }
+  66%  { transform: translate(28px, -22px) scale(0.9); opacity: .38; }
+  100% { transform: translate(0, 0) scale(1); opacity: .44; }
 }
 .hero__blob {
-  animation: blobDrift 14s ease-in-out infinite;
+  animation: blobDrift 10s ease-in-out infinite;
+  width: 680px; height: 680px;
 }
 
-/* 2. Badge: dezentes Pulsen */
+/* 2. Badge: sichtbares Pulsen mit leichtem Heben */
 @keyframes badgePulse {
-  0%, 100% { box-shadow: 0 4px 16px rgba(138,154,120,.18); }
-  50%       { box-shadow: 0 6px 24px rgba(138,154,120,.38), 0 0 0 6px rgba(138,154,120,.08); }
+  0%, 100% { box-shadow: 0 4px 16px rgba(138,154,120,.2); transform: translateY(0); }
+  50%       { box-shadow: 0 10px 32px rgba(138,154,120,.45), 0 0 0 8px rgba(138,154,120,.1); transform: translateY(-3px); }
 }
 .hero__badge {
-  animation: badgePulse 3.6s ease-in-out infinite;
+  animation: badgePulse 2.8s ease-in-out infinite;
 }
 
-/* 3. Karten-Hover: grüner Akzentschimmer */
+/* 3. Karten: sanftes Schweben nach dem Einblenden */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+.card.in { animation: cardFloat 4s ease-in-out infinite; }
+.cards .card:nth-child(2).in { animation-delay: 1.3s; }
+.cards .card:nth-child(3).in { animation-delay: 2.6s; }
+/* Hover überschreibt Float */
 .card:hover {
-  box-shadow: 0 12px 32px rgba(138,154,120,.22), 0 2px 8px rgba(138,154,120,.14);
+  animation: none;
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(138,154,120,.28), 0 2px 8px rgba(138,154,120,.16);
   border-top-color: var(--sage);
 }
 
-/* 4. Zitat-Anführungszeichen: sanftes Einatmen */
+/* 4. Zitat-Anführungszeichen: Einatmen */
 @keyframes markBreathe {
   0%, 100% { opacity: .13; transform: scaleX(1); }
-  50%       { opacity: .22; transform: scaleX(1.04); }
+  50%       { opacity: .28; transform: scaleX(1.06); }
 }
 .mark {
-  animation: markBreathe 5s ease-in-out infinite;
+  animation: markBreathe 4s ease-in-out infinite;
 }
