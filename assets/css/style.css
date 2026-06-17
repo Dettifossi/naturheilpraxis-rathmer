@@ -277,6 +277,17 @@ p  { margin: 0 0 1.1em; color: var(--ink-soft); }
 .price-row__amount { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--sage-dark); white-space: nowrap; }
 .note { font-size: .95rem; color: var(--ink-soft); background: var(--cream-2); border-left: 3px solid var(--sage-light); padding: 14px 18px; border-radius: 0 10px 10px 0; }
 
+/* ---------- Trust chips ---------- */
+.trust-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 18px; }
+.trust-chips span { font-size: .82rem; font-weight: 600; letter-spacing: .07em; color: var(--sage-dark); background: rgba(111,127,94,.1); border: 1px solid rgba(111,127,94,.22); border-radius: 99px; padding: 5px 14px; }
+
+/* ---------- Steps (Wie es läuft) ---------- */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; }
+.step { text-align: center; }
+.step__num { width: 48px; height: 48px; border-radius: 50%; background: var(--sage); color: #fff; font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600; display: grid; place-items: center; margin: 0 auto 18px; }
+.step h3 { font-size: 1.1rem; margin-bottom: .5em; }
+.step p { font-size: .95rem; color: var(--ink-soft); line-height: 1.7; }
+
 /* ---------- Info / contact grid ---------- */
 .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .info-card { background: var(--paper); border:1px solid var(--line); border-top: 3px solid var(--accent); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); transition: transform .22s ease, box-shadow .22s ease; }
