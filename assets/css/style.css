@@ -372,6 +372,11 @@ p  { margin: 0 0 1.1em; color: var(--ink-soft); }
   display: block;
   margin: 0 auto;
 }
+.botanical-split__art img.hahnemann-portrait {
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
 .botanical-split--flip {
   grid-template-columns: 1fr 1.2fr;
 }
