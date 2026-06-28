@@ -229,6 +229,30 @@
       </div>
     </section>
 
+    <!-- ===== Biowetter-Tipp ===== -->
+    <section class="section section--paper" id="biowetter-section">
+      <div class="container reveal">
+        <div id="biowetter-widget" style="max-width:720px;margin:0 auto;background:var(--cream-2);border-left:4px solid var(--sage);border-radius:var(--radius);padding:clamp(1.2rem,3vw,2rem) clamp(1.4rem,4vw,2.4rem);display:flex;gap:1.4rem;align-items:flex-start;">
+          <div style="flex-shrink:0;font-size:2rem;line-height:1;" aria-hidden="true">🌿</div>
+          <div>
+            <p style="font-family:var(--font-sans);font-size:0.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin:0 0 0.4rem;font-weight:600;">Gesundheitstipp heute · <span id="bw-datum"></span></p>
+            <p id="bw-tipp" style="font-family:var(--font-serif);font-size:1.18rem;line-height:1.65;color:var(--ink);margin:0 0 0.6rem;font-style:italic;"></p>
+            <p style="font-family:var(--font-sans);font-size:0.78rem;color:var(--ink-soft);margin:0;">— Detlef Rathmer · <span id="bw-wetter"></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+    fetch('biowetter.json?v=' + Math.floor(Date.now()/3600000))
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('bw-datum').textContent = d.datum || '';
+        document.getElementById('bw-tipp').textContent = d.tipp || '';
+        document.getElementById('bw-wetter').textContent = d.wetter && d.temperatur ? d.wetter + ' · ' + d.temperatur + ' °C' : '';
+      })
+      .catch(() => { document.getElementById('biowetter-section').style.display = 'none'; });
+    </script>
+
     <!-- ===== Patientenstimmen ===== -->
     <style>
       .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: clamp(28px, 4vw, 44px); }
