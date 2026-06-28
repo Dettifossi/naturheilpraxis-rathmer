@@ -163,19 +163,19 @@
       if (s.indexOf('regen') >= 0 || s.indexOf('schauer') >= 0 || s.indexOf('niesel') >= 0) return iconRain();
       if (s.indexOf('bedeckt') >= 0 && s.indexOf('teils') < 0) return iconCloud();
       if (s.indexOf('teils') >= 0 || s.indexOf('wechsel') >= 0) return iconPartly();
-      return t >= 28 ? iconSunHot() : iconSun();
+      return iconSun(t);
     }
 
-    function iconSun() {
-      return '<g style="transform-origin:18px 18px;animation:bw-spin 14s linear infinite">'
-        + rays(18,18,9.5,13.5,'#c8a040',2) + '</g>'
-        + '<circle cx="18" cy="18" r="6" fill="#e8b840" style="animation:bw-pulse 3s ease-in-out infinite"/>';
+    function iconSun(temp) {
+      var col = tempColor(temp);
+      var speed = temp >= 36 ? '5s' : temp >= 32 ? '7s' : temp >= 27 ? '10s' : '15s';
+      var pulse = temp >= 32 ? '1.6s' : '3s';
+      var r = temp >= 27 ? 7 : 6;
+      return '<g style="transform-origin:18px 18px;animation:bw-spin '+speed+' linear infinite">'
+        + rays(18,18,9.5,13.5,col,2) + '</g>'
+        + '<circle cx="18" cy="18" r="'+r+'" fill="'+col+'" style="animation:bw-pulse '+pulse+' ease-in-out infinite"/>';
     }
-    function iconSunHot() {
-      return '<g style="transform-origin:18px 18px;animation:bw-spin 6s linear infinite">'
-        + rays(18,18,9,13,'#d94010',2.5) + '</g>'
-        + '<circle cx="18" cy="18" r="7" fill="#f06020" style="animation:bw-pulse 1.4s ease-in-out infinite"/>';
-    }
+    function iconSunHot(temp) { return iconSun(temp); }
     function rays(cx,cy,r1,r2,col,w) {
       var out=''; var angles=[0,45,90,135,180,225,270,315];
       for(var i=0;i<angles.length;i++){
@@ -219,10 +219,19 @@
         +'<path d="M18 24 Q19 17 25 17 Q31 17 32 24 Q34 24 34 27 Q34 30 31 30 L19 30 Q16 30 16 27 Q16 24 18 24Z" fill="#b8c4cc" style="animation:bw-float 4s ease-in-out infinite"/>';
     }
 
+    function tempColor(temp) {
+      if (temp >= 36) return '#c02000';   // Extremhitze
+      if (temp >= 32) return '#d84010';   // sehr heiß
+      if (temp >= 27) return '#e07820';   // heiß
+      if (temp >= 22) return '#d09030';   // warm
+      if (temp >= 15) return '#80a840';   // angenehm
+      if (temp >=  6) return '#48887a';   // kühl
+      return '#3468b0';                    // kalt
+    }
     function thermoSVG(temp) {
       var pct = Math.max(0, Math.min(1, (temp + 15) / 60));
       var maxH = 19; var fillH = Math.round(pct * maxH);
-      var col = temp >= 30 ? '#d94010' : temp >= 20 ? '#d08020' : temp >= 10 ? '#508050' : '#3060b0';
+      var col = tempColor(temp);
       return '<rect x="6" y="3" width="5" height="22" rx="2.5" fill="#ddd9d0"/>'
         +'<rect x="6" y="'+(25-fillH)+'" width="5" height="'+fillH+'" rx="1.5" fill="'+col+'" style="animation:bw-thermo .9s ease-out"/>'
         +'<circle cx="8.5" cy="29" r="5.5" fill="'+col+'"/>'
