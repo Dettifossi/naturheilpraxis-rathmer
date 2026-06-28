@@ -116,54 +116,36 @@
 
   <!-- ===== Gesundheitstipp-Streifen ===== -->
   <style>
-    #bw-strip {
-      background: var(--cream-2);
-      border-bottom: 1px solid var(--line);
-    }
+    #bw-strip { background: var(--cream-2); border-bottom: 1px solid var(--line); }
     #bw-strip__inner {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 14px 20px 14px 20px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
+      max-width: 1160px; margin: 0 auto; padding: 14px 20px;
+      display: flex; gap: 14px; align-items: flex-start;
     }
-    #bw-strip__icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    #bw-strip__icons { display: flex; gap: 6px; align-items: center; flex-shrink: 0; margin-top: 1px; }
     #bw-strip__content { flex: 1; min-width: 0; }
     #bw-strip__label {
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--sage);
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 5px;
+      font-family: var(--font-sans); font-size: 0.72rem; font-weight: 600;
+      color: var(--sage); letter-spacing: .07em; text-transform: uppercase;
+      display: block; margin-bottom: 5px;
     }
-    #bw-strip__meta {
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      color: var(--ink-soft);
-      margin-left: 8px;
-    }
-    #bw-strip__tipp {
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--ink);
-      font-style: italic;
-      margin: 0 0 4px;
-    }
-    #bw-strip__author {
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      color: var(--ink-soft);
-      margin: 0;
-    }
+    #bw-strip__meta { font-family: var(--font-sans); font-size: 0.72rem; color: var(--ink-soft); margin-left: 8px; font-weight: 400; text-transform: none; letter-spacing: 0; }
+    #bw-strip__tipp { font-family: var(--font-serif); font-size: 1rem; line-height: 1.6; color: var(--ink); font-style: italic; margin: 0 0 4px; }
+    #bw-strip__author { font-family: var(--font-sans); font-size: 0.72rem; color: var(--ink-soft); margin: 0; }
+
+    @keyframes bw-spin    { to { transform: rotate(360deg); } }
+    @keyframes bw-pulse   { 0%,100%{opacity:.65} 50%{opacity:1} }
+    @keyframes bw-rain    { 0%{transform:translateY(-6px);opacity:0} 50%{opacity:1} 100%{transform:translateY(12px);opacity:0} }
+    @keyframes bw-flash   { 0%,88%,100%{opacity:0} 90%,96%{opacity:1} }
+    @keyframes bw-drift   { 0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)} }
+    @keyframes bw-float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-2px)} }
+    @keyframes bw-thermo  { from{height:0} }
   </style>
   <div id="bw-strip">
     <div id="bw-strip__inner">
-      <span id="bw-strip__icon">🌿</span>
+      <div id="bw-strip__icons">
+        <svg id="bw-wx-svg"    width="36" height="36" viewBox="0 0 36 36" overflow="visible"></svg>
+        <svg id="bw-therm-svg" width="18" height="36" viewBox="0 0 18 36"></svg>
+      </div>
       <div id="bw-strip__content">
         <span id="bw-strip__label">Gesundheitstipp heute<span id="bw-strip__meta"></span></span>
         <p id="bw-strip__tipp"></p>
@@ -172,13 +154,92 @@
     </div>
   </div>
   <script>
-  fetch('biowetter.json?v=' + Math.floor(Date.now()/3600000))
-    .then(function(r){ return r.json(); })
-    .then(function(d) {
-      if (d.wetter && d.temperatur)
-        document.getElementById('bw-strip__meta').textContent = ' · ' + d.wetter + ' · ' + d.temperatur + ' °C';
-      document.getElementById('bw-strip__tipp').textContent = d.tipp || '';
-    }).catch(function(){ document.getElementById('bw-strip').style.display='none'; });
+  (function(){
+    function wxIcon(w, t) {
+      var s = (w||'').toLowerCase();
+      if (s.indexOf('gewitter') >= 0) return iconStorm();
+      if (s.indexOf('schnee') >= 0)   return iconSnow();
+      if (s.indexOf('nebel') >= 0)    return iconFog();
+      if (s.indexOf('regen') >= 0 || s.indexOf('schauer') >= 0 || s.indexOf('niesel') >= 0) return iconRain();
+      if (s.indexOf('bedeckt') >= 0 && s.indexOf('teils') < 0) return iconCloud();
+      if (s.indexOf('teils') >= 0 || s.indexOf('wechsel') >= 0) return iconPartly();
+      return t >= 28 ? iconSunHot() : iconSun();
+    }
+
+    function iconSun() {
+      return '<g style="transform-origin:18px 18px;animation:bw-spin 14s linear infinite">'
+        + rays(18,18,9.5,13.5,'#c8a040',2) + '</g>'
+        + '<circle cx="18" cy="18" r="6" fill="#e8b840" style="animation:bw-pulse 3s ease-in-out infinite"/>';
+    }
+    function iconSunHot() {
+      return '<g style="transform-origin:18px 18px;animation:bw-spin 6s linear infinite">'
+        + rays(18,18,9,13,'#d94010',2.5) + '</g>'
+        + '<circle cx="18" cy="18" r="7" fill="#f06020" style="animation:bw-pulse 1.4s ease-in-out infinite"/>';
+    }
+    function rays(cx,cy,r1,r2,col,w) {
+      var out=''; var angles=[0,45,90,135,180,225,270,315];
+      for(var i=0;i<angles.length;i++){
+        var a=angles[i]*Math.PI/180;
+        out+='<line x1="'+(cx+Math.cos(a)*r1)+'" y1="'+(cy+Math.sin(a)*r1)+'" x2="'+(cx+Math.cos(a)*r2)+'" y2="'+(cy+Math.sin(a)*r2)+'" stroke="'+col+'" stroke-width="'+w+'" stroke-linecap="round"/>';
+      }
+      return out;
+    }
+    function iconRain() {
+      var c='<path d="M9 17 Q10 9 18 9 Q26 9 27 17 Q30 17 30 21 Q30 25 26 25 L10 25 Q6 25 6 21 Q6 17 9 17Z" fill="#90b8cc" style="animation:bw-float 4s ease-in-out infinite"/>';
+      var xs=[9,14,19,24,11.5]; var dl=[0,.25,.5,.75,.12];
+      for(var i=0;i<5;i++) c+='<line x1="'+xs[i]+'" y1="26" x2="'+(xs[i]-1.5)+'" y2="33" stroke="#4a7898" stroke-width="1.8" stroke-linecap="round" style="animation:bw-rain .75s '+dl[i]+'s ease-in infinite"/>';
+      return c;
+    }
+    function iconStorm() {
+      return '<path d="M9 17 Q10 9 18 9 Q26 9 27 17 Q30 17 30 21 Q30 25 26 25 L10 25 Q6 25 6 21 Q6 17 9 17Z" fill="#7888a0"/>'
+        +'<polygon points="21,13 15,23 20,23 17,33 25,20 20,20" fill="#f0d030" style="animation:bw-flash 2.2s ease-in-out infinite"/>';
+    }
+    function iconSnow() {
+      return '<g style="transform-origin:18px 18px;animation:bw-spin 9s linear infinite">'
+        +'<line x1="18" y1="5" x2="18" y2="31" stroke="#70a8d0" stroke-width="2" stroke-linecap="round"/>'
+        +'<line x1="5" y1="18" x2="31" y2="18" stroke="#70a8d0" stroke-width="2" stroke-linecap="round"/>'
+        +'<line x1="9" y1="9" x2="27" y2="27" stroke="#70a8d0" stroke-width="2" stroke-linecap="round"/>'
+        +'<line x1="27" y1="9" x2="9" y2="27" stroke="#70a8d0" stroke-width="2" stroke-linecap="round"/>'
+        +'<circle cx="18" cy="18" r="3" fill="#a8d4f0"/>'
+        +'</g>';
+    }
+    function iconFog() {
+      var out=''; var ys=[11,17,23,29]; var dl=[0,.4,.8,.2];
+      for(var i=0;i<4;i++) out+='<line x1="4" y1="'+ys[i]+'" x2="32" y2="'+ys[i]+'" stroke="#909890" stroke-width="2.2" stroke-linecap="round" opacity=".65" style="animation:bw-drift '+(3.2+i*.5)+'s '+dl[i]+'s ease-in-out infinite"/>';
+      return out;
+    }
+    function iconCloud() {
+      return '<path d="M10 22 Q11 13 19 13 Q27 13 28 22 Q31 22 31 25 Q31 29 27 29 L11 29 Q7 29 7 25 Q7 22 10 22Z" fill="#b0b8c0" style="animation:bw-float 5s ease-in-out infinite"/>'
+        +'<path d="M6 24 Q7 18 13 18 Q19 18 20 24 Q22 24 22 27 Q22 30 19 30 L7 30 Q4 30 4 27 Q4 24 6 24Z" fill="#ccd0d4" opacity=".85" style="animation:bw-float 4s .6s ease-in-out infinite"/>';
+    }
+    function iconPartly() {
+      return '<g style="transform-origin:12px 13px;animation:bw-spin 16s linear infinite">'
+        + rays(12,13,7,10.5,'#c8a040',1.8) + '</g>'
+        +'<circle cx="12" cy="13" r="4.5" fill="#e8b840"/>'
+        +'<path d="M18 24 Q19 17 25 17 Q31 17 32 24 Q34 24 34 27 Q34 30 31 30 L19 30 Q16 30 16 27 Q16 24 18 24Z" fill="#b8c4cc" style="animation:bw-float 4s ease-in-out infinite"/>';
+    }
+
+    function thermoSVG(temp) {
+      var pct = Math.max(0, Math.min(1, (temp + 15) / 60));
+      var maxH = 19; var fillH = Math.round(pct * maxH);
+      var col = temp >= 30 ? '#d94010' : temp >= 20 ? '#d08020' : temp >= 10 ? '#508050' : '#3060b0';
+      return '<rect x="6" y="3" width="5" height="22" rx="2.5" fill="#ddd9d0"/>'
+        +'<rect x="6" y="'+(25-fillH)+'" width="5" height="'+fillH+'" rx="1.5" fill="'+col+'" style="animation:bw-thermo .9s ease-out"/>'
+        +'<circle cx="8.5" cy="29" r="5.5" fill="'+col+'"/>'
+        +'<rect x="7" y="23" width="3" height="7" fill="'+col+'"/>';
+    }
+
+    fetch('biowetter.json?v=' + Math.floor(Date.now()/3600000))
+      .then(function(r){ return r.json(); })
+      .then(function(d) {
+        var temp = parseInt(d.temperatur) || 15;
+        if (d.wetter && d.temperatur)
+          document.getElementById('bw-strip__meta').textContent = ' · ' + d.wetter + ' · ' + d.temperatur + ' °C';
+        document.getElementById('bw-strip__tipp').textContent = d.tipp || '';
+        document.getElementById('bw-wx-svg').innerHTML    = wxIcon(d.wetter, temp);
+        document.getElementById('bw-therm-svg').innerHTML = thermoSVG(temp);
+      }).catch(function(){ document.getElementById('bw-strip').style.display='none'; });
+  })();
   </script>
 
   <main>
