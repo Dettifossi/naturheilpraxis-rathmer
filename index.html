@@ -115,33 +115,92 @@
   </header>
 
   <!-- ===== Biowetter-Ticker ===== -->
-  <div id="bw-ticker" style="background:var(--cream-2);border-bottom:1px solid var(--line);cursor:pointer;user-select:none;" onclick="this.classList.toggle('open')">
-    <div style="max-width:1160px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:10px;min-height:42px;">
-      <span style="font-size:1.1rem;flex-shrink:0;">🌿</span>
-      <div style="flex:1;min-width:0;">
-        <span id="bw-ticker-label" style="font-family:var(--font-sans);font-size:0.75rem;font-weight:600;color:var(--sage);letter-spacing:.06em;text-transform:uppercase;">Gesundheitstipp heute</span>
-        <span id="bw-ticker-meta" style="font-family:var(--font-sans);font-size:0.75rem;color:var(--ink-soft);margin-left:6px;"></span>
+  <style>
+    #bw-ticker {
+      background: var(--cream-2);
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      user-select: none;
+    }
+    #bw-ticker__head {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 54px;
+    }
+    #bw-ticker__icon { font-size: 1.4rem; flex-shrink: 0; }
+    #bw-ticker__text { flex: 1; min-width: 0; }
+    #bw-ticker__label {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--sage);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: block;
+    }
+    #bw-ticker__meta {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      display: block;
+      margin-top: 1px;
+    }
+    #bw-ticker__arrow {
+      font-size: 0.85rem;
+      color: var(--sage);
+      transition: transform .28s ease;
+      flex-shrink: 0;
+      padding: 4px;
+    }
+    #bw-ticker__body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .38s ease, padding .38s ease;
+      background: var(--cream-2);
+    }
+    #bw-ticker__body-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 20px 0 56px;
+      border-top: 1px solid var(--line);
+    }
+    #bw-ticker__body-inner p { margin: 14px 0; }
+    #bw-ticker.is-open #bw-ticker__arrow  { transform: rotate(180deg); }
+    #bw-ticker.is-open #bw-ticker__body   { max-height: 400px; }
+  </style>
+  <div id="bw-ticker">
+    <div id="bw-ticker__head">
+      <span id="bw-ticker__icon">🌿</span>
+      <div id="bw-ticker__text">
+        <span id="bw-ticker__label">Gesundheitstipp heute</span>
+        <span id="bw-ticker__meta"></span>
       </div>
-      <span id="bw-ticker-arrow" style="font-size:0.8rem;color:var(--sage);transition:transform .25s;flex-shrink:0;">▼</span>
+      <span id="bw-ticker__arrow">▼</span>
     </div>
-    <div id="bw-ticker-body" style="max-height:0;overflow:hidden;transition:max-height .35s ease;background:var(--cream-2);">
-      <div style="max-width:1160px;margin:0 auto;padding:4px 20px 14px 44px;">
-        <p id="bw-ticker-tipp" style="font-family:var(--font-serif);font-size:1rem;line-height:1.6;color:var(--ink);margin:0;font-style:italic;"></p>
-        <p style="font-family:var(--font-sans);font-size:0.72rem;color:var(--ink-soft);margin:6px 0 0;">— Detlef Rathmer, Heilpraktiker</p>
+    <div id="bw-ticker__body">
+      <div id="bw-ticker__body-inner">
+        <p id="bw-ticker__tipp" style="font-family:var(--font-serif);font-size:1.05rem;line-height:1.65;color:var(--ink);font-style:italic;"></p>
+        <p style="font-family:var(--font-sans);font-size:0.75rem;color:var(--ink-soft);">— Detlef Rathmer, Heilpraktiker</p>
       </div>
     </div>
   </div>
-  <style>
-    #bw-ticker.open #bw-ticker-arrow { transform: rotate(180deg); }
-    #bw-ticker.open #bw-ticker-body  { max-height: 300px; }
-  </style>
   <script>
-  fetch('biowetter.json?v=' + Math.floor(Date.now()/3600000))
-    .then(r => r.json())
-    .then(d => {
-      document.getElementById('bw-ticker-meta').textContent = d.wetter && d.temperatur ? '· ' + d.wetter + ' · ' + d.temperatur + ' °C' : '';
-      document.getElementById('bw-ticker-tipp').textContent = d.tipp || '';
-    }).catch(() => { document.getElementById('bw-ticker').style.display = 'none'; });
+  (function() {
+    fetch('biowetter.json?v=' + Math.floor(Date.now()/3600000))
+      .then(function(r){ return r.json(); })
+      .then(function(d) {
+        document.getElementById('bw-ticker__meta').textContent =
+          (d.wetter && d.temperatur) ? d.wetter + ' · ' + d.temperatur + ' °C' : '';
+        document.getElementById('bw-ticker__tipp').textContent = d.tipp || '';
+      }).catch(function(){ document.getElementById('bw-ticker').style.display='none'; });
+    document.getElementById('bw-ticker').addEventListener('click', function() {
+      this.classList.toggle('is-open');
+    });
+  })();
   </script>
 
   <main>
