@@ -3,7 +3,7 @@ name: Täglicher Biowetter-Tipp
 on:
   schedule:
     - cron: '0 6 * * *'   # täglich 7 Uhr MEZ (= 6 Uhr UTC)
-  workflow_dispatch:        # manueller Start jederzeit möglich
+  workflow_dispatch:
 
 jobs:
   biowetter:
@@ -12,60 +12,103 @@ jobs:
       contents: write
 
     steps:
-      - name: Repo auschecken
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Wetterdaten holen & Tipp generieren
+      - name: Biowetter-Tipp generieren
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          # Großwetterlage Deutschland: Mittelpunkt (51.2°N, 10.5°E)
-          WEATHER=$(curl -s "https://api.open-meteo.com/v1/forecast?latitude=51.2&longitude=10.5&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,surface_pressure,wind_speed_10m,uv_index&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,uv_index_max,weather_code&forecast_days=1&timezone=Europe/Berlin")
-
-          TEMP=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['current']['temperature_2m']))")
-          HUMIDITY=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['current']['relative_humidity_2m']))")
-          PRESSURE=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['current']['surface_pressure']))")
-          PRECIP=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['daily']['precipitation_sum'][0])")
-          WCODE=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['current']['weather_code'])")
-          TMAX=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['daily']['temperature_2m_max'][0]))")
-          TMIN=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['daily']['temperature_2m_min'][0]))")
-          UV=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['daily']['uv_index_max'][0])")
-          WIND=$(echo $WEATHER | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['current']['wind_speed_10m']))")
-          DATE=$(date '+%d.%m.%Y')
-
-          RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "content-type: application/json" \
-            -d "{
-              \"model\": \"claude-haiku-4-5-20251001\",
-              \"max_tokens\": 300,
-              \"system\": \"Du bist Detlef Rathmer, Heilpraktiker und Naturheilkundler mit über 25 Jahren Erfahrung. Du schreibst einen kurzen täglichen Gesundheitstipp passend zur aktuellen Großwetterlage in Deutschland. Wichtige Regeln: 1) Kein ortsgebundener Bezug – der Tipp gilt deutschlandweit. 2) HWG-konform: Keine Heilversprechen. Formulierungen wie 'kann unterstützen', 'bewährt bei', 'traditionell genutzt'. 3) Themen: Homöopathie, Schüßler-Salze, Kneipp, Ernährung, Kräuter, Bewegung. 4) Ton: warmherzig, kompetent, nicht aufdringlich. 5) Länge: 2-3 Sätze. 6) Kein einleitender Satz wie 'Heute ist das Wetter...' – direkt mit dem Tipp beginnen.\",
-              \"messages\": [{
-                \"role\": \"user\",
-                \"content\": \"Großwetterlage Deutschland heute ($DATE): Temperatur $TEMP°C (Min $TMIN°C / Max $TMAX°C), Luftdruck $PRESSURE hPa, Luftfeuchtigkeit $HUMIDITY%, Wind $WIND km/h, Niederschlag $PRECIP mm, UV-Index $UV, Wettercode $WCODE. Bitte schreibe den heutigen Gesundheitstipp.\"
-              }]
-            }")
-
-          TIPP=$(echo $RESPONSE | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['content'][0]['text'])")
-
-          # Wettercode in lesbaren Begriff übersetzen
-          WETTER=$(python3 -c "
-          codes = {0:'Klarer Himmel',1:'Überwiegend klar',2:'Teils bewölkt',3:'Bedeckt',45:'Nebel',48:'Raureif-Nebel',51:'Leichter Nieselregen',53:'Nieselregen',55:'Starker Nieselregen',61:'Leichter Regen',63:'Regen',65:'Starker Regen',71:'Leichter Schneefall',73:'Schneefall',75:'Starker Schneefall',80:'Leichte Regenschauer',81:'Regenschauer',82:'Starke Regenschauer',95:'Gewitter',96:'Gewitter mit Hagel',99:'Schweres Gewitter'}
-          print(codes.get($WCODE, 'Wechselhaft'))
-          ")
-
-          python3 -c "
+          python3 << 'PYEOF'
+          import urllib.request
           import json
-          data = {
-            'datum': '$DATE',
-            'wetter': '$WETTER',
-            'temperatur': '$TEMP',
-            'tipp': '''$TIPP'''
+          import os
+          from datetime import datetime
+
+          # 1. Wetterdaten holen (Mitte Deutschland)
+          url = (
+            "https://api.open-meteo.com/v1/forecast"
+            "?latitude=51.2&longitude=10.5"
+            "&current=temperature_2m,relative_humidity_2m,weather_code,"
+            "surface_pressure,wind_speed_10m"
+            "&daily=temperature_2m_max,temperature_2m_min,"
+            "precipitation_sum,uv_index_max,weather_code"
+            "&forecast_days=1&timezone=Europe/Berlin"
+          )
+          with urllib.request.urlopen(url) as r:
+            w = json.load(r)
+
+          temp    = round(w["current"]["temperature_2m"])
+          tmax    = round(w["daily"]["temperature_2m_max"][0])
+          tmin    = round(w["daily"]["temperature_2m_min"][0])
+          druck   = round(w["current"]["surface_pressure"])
+          feuchte = round(w["current"]["relative_humidity_2m"])
+          wind    = round(w["current"]["wind_speed_10m"])
+          precip  = w["daily"]["precipitation_sum"][0]
+          uv      = w["daily"]["uv_index_max"][0]
+          wcode   = w["current"]["weather_code"]
+          datum   = datetime.now().strftime("%d.%m.%Y")
+
+          codes = {
+            0:"Klarer Himmel",1:"Überwiegend klar",2:"Teils bewölkt",
+            3:"Bedeckt",45:"Nebel",51:"Leichter Nieselregen",
+            61:"Leichter Regen",63:"Regen",65:"Starker Regen",
+            80:"Regenschauer",81:"Regenschauer",95:"Gewitter"
           }
-          with open('biowetter.json', 'w', encoding='utf-8') as f:
+          wetter_text = codes.get(wcode, "Wechselhaft")
+
+          # 2. Claude API aufrufen
+          system_prompt = (
+            "Du bist Detlef Rathmer, Heilpraktiker mit über 25 Jahren Erfahrung. "
+            "Schreibe einen kurzen täglichen Gesundheitstipp zur Großwetterlage in Deutschland. "
+            "Regeln: Kein Ortsbezug. HWG-konform (keine Heilversprechen, statt dessen: "
+            "'kann unterstützen', 'bewährt bei', 'traditionell genutzt'). "
+            "Themen: Homöopathie, Schüßler-Salze, Kneipp, Ernährung, Kräuter, Bewegung. "
+            "Ton: warmherzig, kompetent. Länge: 2-3 Sätze. "
+            "Beginne direkt mit dem Tipp, kein einleitender Wettersatz."
+          )
+
+          user_msg = (
+            f"Großwetterlage Deutschland heute ({datum}): "
+            f"Temperatur {temp}°C (Min {tmin}°C / Max {tmax}°C), "
+            f"Luftdruck {druck} hPa, Luftfeuchtigkeit {feuchte}%, "
+            f"Wind {wind} km/h, Niederschlag {precip} mm, "
+            f"UV-Index {uv}, Wetter: {wetter_text}. "
+            f"Bitte schreibe den heutigen Gesundheitstipp."
+          )
+
+          payload = json.dumps({
+            "model": "claude-haiku-4-5-20251001",
+            "max_tokens": 300,
+            "system": system_prompt,
+            "messages": [{"role": "user", "content": user_msg}]
+          }).encode("utf-8")
+
+          req = urllib.request.Request(
+            "https://api.anthropic.com/v1/messages",
+            data=payload,
+            headers={
+              "x-api-key": os.environ["ANTHROPIC_API_KEY"],
+              "anthropic-version": "2023-06-01",
+              "content-type": "application/json"
+            }
+          )
+          with urllib.request.urlopen(req) as r:
+            resp = json.load(r)
+
+          tipp = resp["content"][0]["text"].strip()
+
+          # 3. biowetter.json schreiben
+          data = {
+            "datum": datum,
+            "wetter": wetter_text,
+            "temperatur": str(temp),
+            "tipp": tipp
+          }
+          with open("biowetter.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-          "
+
+          print(f"✓ Tipp generiert: {tipp[:80]}...")
+          PYEOF
 
       - name: Änderungen committen
         run: |
