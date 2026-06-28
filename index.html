@@ -114,6 +114,36 @@
     </div>
   </header>
 
+  <!-- ===== Biowetter-Ticker ===== -->
+  <div id="bw-ticker" style="background:var(--cream-2);border-bottom:1px solid var(--line);cursor:pointer;user-select:none;" onclick="this.classList.toggle('open')">
+    <div style="max-width:1160px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:10px;min-height:42px;">
+      <span style="font-size:1.1rem;flex-shrink:0;">🌿</span>
+      <div style="flex:1;min-width:0;">
+        <span id="bw-ticker-label" style="font-family:var(--font-sans);font-size:0.75rem;font-weight:600;color:var(--sage);letter-spacing:.06em;text-transform:uppercase;">Gesundheitstipp heute</span>
+        <span id="bw-ticker-meta" style="font-family:var(--font-sans);font-size:0.75rem;color:var(--ink-soft);margin-left:6px;"></span>
+      </div>
+      <span id="bw-ticker-arrow" style="font-size:0.8rem;color:var(--sage);transition:transform .25s;flex-shrink:0;">▼</span>
+    </div>
+    <div id="bw-ticker-body" style="max-height:0;overflow:hidden;transition:max-height .35s ease;background:var(--cream-2);">
+      <div style="max-width:1160px;margin:0 auto;padding:4px 20px 14px 44px;">
+        <p id="bw-ticker-tipp" style="font-family:var(--font-serif);font-size:1rem;line-height:1.6;color:var(--ink);margin:0;font-style:italic;"></p>
+        <p style="font-family:var(--font-sans);font-size:0.72rem;color:var(--ink-soft);margin:6px 0 0;">— Detlef Rathmer, Heilpraktiker</p>
+      </div>
+    </div>
+  </div>
+  <style>
+    #bw-ticker.open #bw-ticker-arrow { transform: rotate(180deg); }
+    #bw-ticker.open #bw-ticker-body  { max-height: 300px; }
+  </style>
+  <script>
+  fetch('biowetter.json?v=' + Math.floor(Date.now()/3600000))
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('bw-ticker-meta').textContent = d.wetter && d.temperatur ? '· ' + d.wetter + ' · ' + d.temperatur + ' °C' : '';
+      document.getElementById('bw-ticker-tipp').textContent = d.tipp || '';
+    }).catch(() => { document.getElementById('bw-ticker').style.display = 'none'; });
+  </script>
+
   <main>
     <!-- ===== Hero ===== -->
     <section class="hero">
