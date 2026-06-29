@@ -2,7 +2,9 @@ name: Täglicher Biowetter-Tipp
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # täglich 7 Uhr MEZ (= 6 Uhr UTC)
+    - cron: '0 5 * * *'   #  7 Uhr MEZ (= 5 Uhr UTC)
+    - cron: '0 11 * * *'  # 13 Uhr MEZ (= 11 Uhr UTC)
+    - cron: '0 16 * * *'  # 18 Uhr MEZ (= 16 Uhr UTC)
   workflow_dispatch:
 
 jobs:
