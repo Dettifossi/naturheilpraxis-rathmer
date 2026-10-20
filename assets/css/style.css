@@ -39,7 +39,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 a { color: var(--accent-dark); text-decoration: none; transition: color .2s ease; }
 a:hover { color: var(--accent); }
 
@@ -639,4 +639,20 @@ p  { margin: 0 0 1.1em; color: var(--ink-soft); }
 }
 .mark {
   animation: markBreathe 4s ease-in-out infinite;
+}
+
+/* ---------- Bedienung: Druck-Feedback, Tastaturfokus, reduzierte Bewegung ---------- */
+a, button, .btn { -webkit-tap-highlight-color: transparent; }
+.btn:active { transform: scale(.97); transition-duration: .08s; }
+.card:active, .info-card:active { transform: scale(.985); transition-duration: .08s; }
+.nav__links a:active { background: rgba(111,127,94,.2); }
+:focus-visible { outline: 2px solid var(--sage-dark); outline-offset: 3px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .btn:active, .card:active, .info-card:active { transform: none; }
 }
