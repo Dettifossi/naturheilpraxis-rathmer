@@ -133,6 +133,18 @@
     #bw-strip__tipp { font-family: var(--font-serif); font-size: 1rem; line-height: 1.6; color: var(--ink); font-style: italic; margin: 0 0 4px; }
     #bw-strip__author { font-family: var(--font-sans); font-size: 0.72rem; color: var(--ink-soft); margin: 0; }
 
+    #bw-strip__more { display: none; margin: 2px 0 0; padding: 6px 0; background: none; border: 0; cursor: pointer;
+      font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600; color: var(--sage-dark); text-decoration: underline; text-underline-offset: 3px; }
+    @media (max-width: 720px) {
+      #bw-strip__inner { padding: 10px 16px; gap: 10px; }
+      #bw-strip__icons { gap: 4px; }
+      #bw-strip__label { margin-bottom: 3px; }
+      #bw-strip__tipp { font-size: .95rem; line-height: 1.5; }
+      #bw-strip:not(.is-open) #bw-strip__tipp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      #bw-strip:not(.is-open) #bw-strip__author { display: none; }
+      #bw-strip.is-clampable #bw-strip__more { display: inline-block; }
+    }
+
     @keyframes bw-spin    { to { transform: rotate(360deg); } }
     @keyframes bw-pulse   { 0%,100%{opacity:.65} 50%{opacity:1} }
     @keyframes bw-rain    { 0%{transform:translateY(-6px);opacity:0} 50%{opacity:1} 100%{transform:translateY(12px);opacity:0} }
@@ -151,6 +163,7 @@
         <span id="bw-strip__label">Gesundheitstipp heute<span id="bw-strip__meta"></span></span>
         <p id="bw-strip__tipp"></p>
         <p id="bw-strip__author">— Detlef Rathmer, Heilpraktiker</p>
+        <button id="bw-strip__more" type="button" aria-expanded="false" aria-controls="bw-strip__tipp">Weiterlesen</button>
       </div>
     </div>
   </div>
@@ -246,6 +259,20 @@
         if (d.wetter && d.temperatur)
           document.getElementById('bw-strip__meta').textContent = ' · ' + d.wetter + ' · ' + d.temperatur + ' °C';
         document.getElementById('bw-strip__tipp').textContent = d.tipp || '';
+        (function () {
+          var strip = document.getElementById('bw-strip'), tipp = document.getElementById('bw-strip__tipp'), more = document.getElementById('bw-strip__more');
+          function measure() {
+            if (strip.classList.contains('is-open')) return;
+            strip.classList.toggle('is-clampable', window.matchMedia('(max-width: 720px)').matches && tipp.scrollHeight > tipp.clientHeight + 1);
+          }
+          more.addEventListener('click', function () {
+            var open = strip.classList.toggle('is-open');
+            more.setAttribute('aria-expanded', open ? 'true' : 'false');
+            more.textContent = open ? 'Weniger anzeigen' : 'Weiterlesen';
+            if (!open) measure();
+          });
+          measure(); window.addEventListener('resize', measure);
+        })();
         document.getElementById('bw-wx-svg').innerHTML    = wxIcon(d.wetter, temp);
         document.getElementById('bw-therm-svg').innerHTML = thermoSVG(temp);
       }).catch(function(){ document.getElementById('bw-strip').style.display='none'; });
