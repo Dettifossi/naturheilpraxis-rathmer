@@ -61,7 +61,7 @@ TPL='''<!DOCTYPE html>
   </article>
   <div class="btns">
     <a class="btn primary" id="praxis" href="https://www.psychologische-homoeopathie.de/">Mehr über die Naturheilpraxis Detlef Rathmer</a>
-    <a class="btn secondary" id="beratung" href="https://www.psychologische-homoeopathie.de/beratung.html">Beratung und Terminvereinbarung</a>
+    <a class="btn secondary" id="beratung" href="https://www.psychologische-homoeopathie.de/kontakt.html#termin">Termin anfragen</a>
   </div>
   <footer>© Detlef Rathmer, Heilpraktiker · <a href="https://www.psychologische-homoeopathie.de/impressum.html">Impressum</a> · <a href="https://www.psychologische-homoeopathie.de/datenschutz.html">Datenschutz</a></footer>
 </main>
@@ -69,8 +69,11 @@ TPL='''<!DOCTYPE html>
   // Herkunftskanal (?q=fb, wa, ig, tt, xing) an die Links hängen
   (function () {
     var q = new URLSearchParams(location.search).get("q") || "direkt";
-    var utm = "?utm_source=tipp&utm_medium=" + encodeURIComponent(q) + "&utm_campaign={{N}}";
-    ["praxis", "beratung"].forEach(function (id) { var a = document.getElementById(id); a.href += utm; });
+    ["praxis", "beratung"].forEach(function (id) {
+      var a = document.getElementById(id), u = new URL(a.href);
+      u.searchParams.set("utm_source", "tipp"); u.searchParams.set("utm_medium", q); u.searchParams.set("utm_campaign", "{{N}}");
+      a.href = u.href;
+    });
   })();
 </script>
 </body>
