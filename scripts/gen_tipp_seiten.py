@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+"""Erzeugt tipp/NNN.html (Landingpage je Gesundheitstipp) und tipp/tipps.json aus scripts/tipps_data.py.
+Bilder (Quadrat/Story) liegen auf R2 (assets/praxis-tipps/NNN-*.jpg), nicht im Repo."""
+import html,json,os,sys
+sys.path.insert(0,os.path.dirname(__file__))
+from tipps_data import T
+R2="https://pub-2851309644cc48aea2a2ae780b41b196.r2.dev/assets/praxis-tipps/"
+SITE="https://www.psychologische-homoeopathie.de/"
+out=os.path.join(os.path.dirname(__file__),"..","tipp")
+TPL='''<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{TITEL}} – Gesundheitstipp | Naturheilpraxis Detlef Rathmer</title>
+<meta name="description" content="{{DESC}}" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.psychologische-homoeopathie.de/tipp/{{N}}.html" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Naturheilpraxis Detlef Rathmer" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:title" content="{{TITEL}} – Gesundheitstipp" />
+<meta property="og:description" content="{{KURZ}}" />
+<meta property="og:image" content="{{IMG}}" />
+<meta property="og:url" content="https://www.psychologische-homoeopathie.de/tipp/{{N}}.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="{{IMG}}" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --sage:#6f7f5e; --sage-dark:#56654a; --cream:#faf7f0; --paper:#fff; --ink:#2f322b; --soft:#555a4e; --accent:#a06535; --line:#e3ddcd; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--cream); color:var(--ink); line-height:1.65; }
+  main { max-width:640px; margin:0 auto; padding:2rem 1.25rem 3rem; }
+  .brand { text-align:center; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--soft); }
+  .card { margin:1.2rem 0 1.4rem; padding:2rem 1.5rem; background:var(--paper); border:1px solid var(--line); border-radius:16px; box-shadow:0 18px 44px rgba(60,72,48,.08); }
+  .kat { text-align:center; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  h1 { font-family:'Cormorant Garamond',Georgia,serif; font-weight:700; font-size:clamp(2rem,7vw,2.6rem); line-height:1.1; text-align:center; color:var(--sage-dark); margin:.4rem 0 1.1rem; text-wrap:balance; }
+  p { margin:0 0 1rem; }
+  h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.4rem; color:var(--sage-dark); margin:1.4rem 0 .4rem; }
+  ul { margin:0 0 1rem; padding-left:1.2rem; } li { margin:.15rem 0; }
+  .hinweis { background:#f1efe4; border-left:3px solid var(--sage); padding:.8rem 1rem; border-radius:6px; font-size:.88rem; color:var(--soft); margin-top:1.4rem; }
+  .btns { display:grid; gap:.7rem; margin-top:1.6rem; }
+  .btn { display:block; text-align:center; padding:.95rem 1.2rem; border-radius:12px; text-decoration:none; font-weight:600; transition:transform .2s cubic-bezier(.2,.9,.3,1.2); }
+  .btn:active { transform:scale(.98); }
+  .btn.primary { background:var(--sage-dark); color:#fff; }
+  .btn.secondary { border:1.5px solid var(--sage-dark); color:var(--sage-dark); }
+  footer { text-align:center; margin-top:2rem; color:var(--soft); font-size:.8rem; } footer a { color:inherit; }
+  @media (prefers-reduced-motion:reduce) { .btn { transition:none; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">Naturheilpraxis Detlef Rathmer · Billerbeck</div>
+  <article class="card">
+    <div class="kat">{{KAT}}</div>
+    <h1>{{TITEL}}</h1>
+    <p>{{TEXT}}</p>
+{{ZUTATEN}}{{ZUBEREITUNG}}    <div class="hinweis">Allgemeine Information zur Lebensführung. Sie ersetzt keine ärztliche oder heilpraktische Untersuchung und Behandlung. Bei Beschwerden, Schwangerschaft, Medikamenteneinnahme, Allergien oder Unverträglichkeiten bitte vorab Rücksprache halten.</div>
+  </article>
+  <div class="btns">
+    <a class="btn primary" id="praxis" href="https://www.psychologische-homoeopathie.de/">Mehr über die Naturheilpraxis Detlef Rathmer</a>
+    <a class="btn secondary" id="beratung" href="https://www.psychologische-homoeopathie.de/beratung.html">Beratung und Terminvereinbarung</a>
+  </div>
+  <footer>© Detlef Rathmer, Heilpraktiker · <a href="https://www.psychologische-homoeopathie.de/impressum.html">Impressum</a> · <a href="https://www.psychologische-homoeopathie.de/datenschutz.html">Datenschutz</a></footer>
+</main>
+<script>
+  // Herkunftskanal (?q=fb, wa, ig, tt, xing) an die Links hängen
+  (function () {
+    var q = new URLSearchParams(location.search).get("q") || "direkt";
+    var utm = "?utm_source=tipp&utm_medium=" + encodeURIComponent(q) + "&utm_campaign={{N}}";
+    ["praxis", "beratung"].forEach(function (id) { var a = document.getElementById(id); a.href += utm; });
+  })();
+</script>
+</body>
+</html>
+'''
+e=html.escape
+meta=[]
+for i,t in enumerate(T,1):
+    n=f"{i:03d}"
+    z=""
+    if t["zutaten"]:
+        z="    <h2>Zutaten</h2>\n    <ul>"+"".join(f"<li>{e(x)}</li>" for x in t["zutaten"])+"</ul>\n"
+    zb=f"    <h2>Zubereitung</h2>\n    <p>{e(t['zubereitung'])}</p>\n" if t["zubereitung"] else ""
+    page=(TPL.replace("{{N}}",n).replace("{{TITEL}}",e(t["titel"])).replace("{{KAT}}",e(t["k"]))
+      .replace("{{TEXT}}",e(t["text"])).replace("{{KURZ}}",e(t["kurz"])).replace("{{ZUTATEN}}",z).replace("{{ZUBEREITUNG}}",zb)
+      .replace("{{DESC}}",e(t["kurz"]+" Gesundheitstipp der Naturheilpraxis Detlef Rathmer, Billerbeck."))
+      .replace("{{IMG}}",R2+n+"-quadrat.jpg"))
+    open(os.path.join(out,n+".html"),"w",encoding="utf-8").write(page)
+    meta.append(dict(n=n,**t))
+json.dump(meta,open(os.path.join(out,"tipps.json"),"w",encoding="utf-8"),ensure_ascii=False)
+print(len(T))

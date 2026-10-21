@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tipp-Karten – Werkzeug</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+  :root { --sage:#6f7f5e; --sage-dark:#56654a; --cream:#faf7f0; --paper:#fff; --ink:#2f322b; --soft:#555a4e; --accent:#a06535; --line:#e3ddcd; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--cream); color:var(--ink); }
+  header { position:sticky; top:0; z-index:5; background:rgba(250,247,240,.9); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); padding:.8rem 1rem; }
+  h1 { margin:0 0 .6rem; font-size:1.05rem; color:var(--sage-dark); }
+  .bar { display:flex; gap:.5rem; flex-wrap:wrap; }
+  input,select { font:inherit; font-size:16px; padding:.5rem .7rem; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  input { flex:1 1 200px; }
+  .info { font-size:.82rem; color:var(--soft); margin:.5rem 0 0; }
+  main { max-width:1100px; margin:0 auto; padding:1rem; display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); }
+  .c { background:var(--paper); border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+  .c img { width:100%; aspect-ratio:1; display:block; background:#eee; object-fit:cover; }
+  .row { display:flex; flex-wrap:wrap; gap:.4rem; padding:.7rem .8rem .8rem; }
+  button { font:inherit; font-size:.85rem; padding:.45rem .7rem; border-radius:8px; border:1.5px solid var(--sage-dark); background:transparent; color:var(--sage-dark); cursor:pointer; }
+  button.p { background:var(--sage-dark); color:#fff; }
+  button:active { transform:scale(.97); }
+  .toast { position:fixed; left:50%; bottom:1.2rem; transform:translateX(-50%); background:var(--ink); color:#fff; padding:.6rem 1rem; border-radius:10px; font-size:.9rem; opacity:0; transition:opacity .25s; pointer-events:none; z-index:10; }
+  .toast.on { opacity:1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Tipp-Karten der Naturheilpraxis</h1>
+  <div class="bar">
+    <input id="s" type="search" placeholder="Suchen (Tipp oder Zutat) …" />
+    <select id="kt"><option value="">Alle Kategorien</option></select>
+    <select id="ch">
+      <option value="fb">Kanal: Facebook</option><option value="wa">Kanal: WhatsApp</option><option value="xing">Kanal: Xing</option><option value="ig">Kanal: Instagram</option><option value="tt">Kanal: TikTok</option><option value="x">Kanal: X</option>
+    </select>
+  </div>
+  <p class="info" id="n"></p>
+</header>
+<main id="g"></main>
+<div class="toast" id="to"></div>
+<script>
+(function () {
+  var R2 = "https://pub-2851309644cc48aea2a2ae780b41b196.r2.dev/assets/praxis-tipps/";
+  var BASE = "https://www.psychologische-homoeopathie.de/tipp/";
+  var Z = [];
+  var g = document.getElementById("g"), s = document.getElementById("s"), kt = document.getElementById("kt"), ch = document.getElementById("ch"), nEl = document.getElementById("n");
+  function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function toast(m) { var t = document.getElementById("to"); t.textContent = m; t.classList.add("on"); setTimeout(function () { t.classList.remove("on"); }, 1800); }
+  function link(z) { return BASE + z.n + ".html?q=" + ch.value; }
+  function text(z) {
+    var t = z.titel + "\n\n" + z.text;
+    if (z.zutaten) t += "\n\nZutaten: " + z.zutaten.join(", ") + ".";
+    if (z.zubereitung) t += "\n\nZubereitung: " + z.zubereitung;
+    if (ch.value === "ig" || ch.value === "tt") t += "\n\nMehr dazu über den Link in der Bio.";
+    else t += "\n\nMehr dazu: " + link(z);
+    t += "\n\nAllgemeine Information zur Lebensführung, ersetzt keine ärztliche oder heilpraktische Behandlung.";
+    t += "\n\n#Gesundheitstipp #Naturheilkunde #Hausmittel #Billerbeck";
+    return t;
+  }
+  function render() {
+    var q = s.value.trim().toLowerCase(), k = kt.value;
+    var L = Z.filter(function (z) { return (!k || z.k === k) && (!q || (z.titel + " " + z.text + " " + (z.zutaten || []).join(" ")).toLowerCase().indexOf(q) > -1); });
+    nEl.textContent = L.length + " von " + Z.length + " Tipps. „Text kopieren“ enthält Zutaten, Zubereitung, Hinweis und Link, passend zum Kanal. Bei Instagram und TikTok steht „Link in der Bio“.";
+    g.innerHTML = L.map(function (z) {
+      return '<div class="c" data-n="' + z.n + '"><img loading="lazy" alt="' + esc(z.titel) + '" src="' + R2 + z.n + '-quadrat.jpg"><div class="row">' +
+        '<button class="p" data-a="copy">Text + Link kopieren</button><button data-a="q">Quadrat speichern</button><button data-a="st">Story speichern</button><button data-a="pg">Seite ansehen</button></div></div>';
+    }).join("");
+  }
+  function save(url, name) {
+    fetch(url).then(function (r) { return r.blob(); }).then(function (b) {
+      var a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = name; a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    }).catch(function () { window.open(url, "_blank"); toast("Bild öffnet sich, dort lang drücken bzw. rechtsklicken zum Speichern"); });
+  }
+  g.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    var z = Z.filter(function (x) { return x.n === b.closest(".c").dataset.n; })[0], a = b.dataset.a;
+    if (a === "copy") { (navigator.clipboard ? navigator.clipboard.writeText(text(z)) : Promise.reject()).then(function () { toast("Text und Link kopiert"); }, function () { prompt("Bitte kopieren:", text(z)); }); }
+    if (a === "q") save(R2 + z.n + "-quadrat.jpg", "tipp-" + z.n + "-quadrat.jpg");
+    if (a === "st") save(R2 + z.n + "-story.jpg", "tipp-" + z.n + "-story.jpg");
+    if (a === "pg") window.open(link(z), "_blank");
+  });
+  s.addEventListener("input", render); kt.addEventListener("change", render);
+  fetch("tipp/tipps.json").then(function (r) { return r.json(); }).then(function (d) {
+    Z = d;
+    Array.from(new Set(Z.map(function (z) { return z.k; }))).forEach(function (k) { var o = document.createElement("option"); o.value = k; o.textContent = k; kt.appendChild(o); });
+    render();
+  });
+})();
+</script>
+</body>
+</html>
