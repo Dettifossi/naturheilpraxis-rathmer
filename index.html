@@ -286,6 +286,7 @@
       <div class="container hero__inner">
         <div class="hero__content reveal">
           <p class="eyebrow">Naturheilpraxis seit über 25 Jahren</p>
+          <button type="button" id="greet-btn" class="btn btn--ghost" aria-pressed="false" aria-label="Begrüßung anhören" style="padding:.45rem 1rem;font-size:.88rem;margin:0 0 1rem;display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6.5a8 8 0 0 1 0 11"/></svg><span class="greet-label">Begrüßung anhören</span></button>
           <h1 class="hero__title">Wenn Beschwerden eine <span class="em">tiefere Sprache</span> sprechen.</h1>
           <p class="hero__text">Ich helfe Ihnen, diese Sprache zu verstehen — und begleite Sie aufmerksam und individuell auf dem Weg zur Heilung. Mit klassischer Homöopathie, dem Enneagramm und psychologischer Beratung.</p>
           <div class="hero__actions">
@@ -744,21 +745,22 @@
 
   <script src="assets/js/main.js"></script>
   <script>
-    // Gesprochene Begrüßung – einmal pro Browser-Session, ausgelöst durch die
-    // erste Nutzerinteraktion (Autoplay mit Ton wird sonst geblockt).
+    // Gesprochene Begrüßung: nur auf Wunsch (Schalter), nie automatisch.
     (function initWelcomeGreeting() {
-      const KEY = 'naturheilpraxis-welcome-played';
-      if (sessionStorage.getItem(KEY)) return;
-      const events = ['click', 'touchstart', 'keydown'];
-      let played = false;
-      const play = () => {
-        if (played) return;
-        played = true;
-        sessionStorage.setItem(KEY, '1');
-        events.forEach(ev => document.removeEventListener(ev, play));
-        try { new Audio('assets/sounds/willkommen.mp3').play().catch(() => {}); } catch (e) {}
-      };
-      events.forEach(ev => document.addEventListener(ev, play, { once: true }));
+      var btn = document.getElementById('greet-btn'), audio = null;
+      if (!btn) return;
+      function ui(on) {
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.querySelector('.greet-label').textContent = on ? 'Läuft, zum Stoppen tippen' : 'Begrüßung anhören';
+      }
+      btn.addEventListener('click', function () {
+        if (audio && !audio.paused) { audio.pause(); audio.currentTime = 0; ui(false); return; }
+        try {
+          audio = new Audio('assets/sounds/willkommen.mp3');
+          audio.addEventListener('ended', function () { ui(false); });
+          audio.play().then(function () { ui(true); }).catch(function () { ui(false); });
+        } catch (e) { ui(false); }
+      });
     })();
   </script>
 </body>
