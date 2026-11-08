@@ -23,22 +23,23 @@ jobs:
           import json
           from datetime import datetime
 
-          # 1. Wetterdaten holen (Mitte Deutschland)
-          url = (
-            "https://api.open-meteo.com/v1/forecast"
-            "?latitude=51.2&longitude=10.5"
-            "&current=temperature_2m,weather_code,surface_pressure,wind_speed_10m"
-            "&daily=temperature_2m_max,precipitation_sum,uv_index_max,weather_code"
-            "&forecast_days=1&timezone=Europe/Berlin"
-          )
+          # 1. Wetterdaten holen: Deutscher Wetterdienst (DWD) über Bright Sky (Mitte Deutschland)
+          url = "https://api.brightsky.dev/current_weather?lat=51.2&lon=10.5&tz=Europe/Berlin"
           with urllib.request.urlopen(url) as r:
-            w = json.load(r)
+            w = json.load(r)["weather"]
 
-          temp  = round(w["current"]["temperature_2m"])
-          tmax  = round(w["daily"]["temperature_2m_max"][0])
-          druck = round(w["current"]["surface_pressure"])
-          wind  = round(w["current"]["wind_speed_10m"])
-          wcode = w["current"]["weather_code"]
+          temp  = round(w["temperature"])
+          druck = round(w.get("pressure_msl") or 1013)
+          wind  = round(w.get("wind_speed_10") or 0)
+          # Bright Sky liefert Symbole statt WMO-Codes: auf die bisherigen Codes abbilden
+          icon2code = {
+            "clear-day":0, "clear-night":0, "partly-cloudy-day":2, "partly-cloudy-night":2,
+            "cloudy":3, "wind":3, "fog":45, "rain":61, "sleet":71, "snow":73,
+            "hail":82, "thunderstorm":95
+          }
+          wcode = icon2code.get(w.get("icon"), 3)
+          # Luftdruck: Bright Sky meldet auf Meereshöhe (Tiefdruck ab unter 1005 hPa)
+          druck = 990 if druck < 1005 else 1013
           monat = datetime.now().month
           datum = datetime.now().strftime("%d.%m.%Y")
           tag_nr = int(datetime.now().strftime("%j"))  # Tag des Jahres (1-365)
@@ -47,9 +48,9 @@ jobs:
             0:"Klarer Himmel", 1:"Überwiegend klar", 2:"Teils bewölkt",
             3:"Bedeckt", 45:"Nebel", 48:"Nebel", 51:"Nieselregen",
             53:"Nieselregen", 55:"Nieselregen", 61:"Regen", 63:"Regen",
-            65:"Starker Regen", 71:"Schneefall", 73:"Schneefall",
+            65:"Starker Regen", 71:"Schneeregen", 73:"Schneefall",
             75:"Schneefall", 80:"Regenschauer", 81:"Regenschauer",
-            82:"Starker Regenschauer", 95:"Gewitter", 96:"Gewitter",
+            82:"Hagel", 95:"Gewitter", 96:"Gewitter",
             99:"Schweres Gewitter"
           }
           wetter_text = codes.get(wcode, "Wechselhaft")
