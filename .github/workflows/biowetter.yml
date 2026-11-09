@@ -102,12 +102,48 @@ jobs:
           liste = tipps.get(kategorie, tipps["standard"])
           tipp  = liste[tag_nr % len(liste)]
 
+          # 3b. Vorschau für die nächsten 3 Tage (Billerbeck, DWD über Bright Sky); Fehler brechen den Tipp nicht ab
+          vorschau = []
+          druck_hpa = None
+          try:
+            from datetime import timedelta
+            heute = datetime.now()
+            url2 = ("https://api.brightsky.dev/weather?lat=51.98&lon=7.29&date=%s&last_date=%s&tz=Europe/Berlin"
+                    % (heute.strftime("%Y-%m-%d"), (heute + timedelta(days=3)).strftime("%Y-%m-%d")))
+            with urllib.request.urlopen(url2) as r2:
+              stunden = json.load(r2)["weather"]
+            try:
+              druck_hpa = round(w.get("pressure_msl"))
+            except Exception:
+              druck_hpa = None
+            tage = {}
+            for s in stunden:
+              tage.setdefault(s["timestamp"][:10], []).append(s)
+            wt = ["Mo","Di","Mi","Do","Fr","Sa","So"]
+            txt = {"clear-day":"Klar","clear-night":"Klar","partly-cloudy-day":"Teils bewölkt","partly-cloudy-night":"Teils bewölkt",
+                   "cloudy":"Bedeckt","wind":"Windig","fog":"Nebel","rain":"Regen","sleet":"Schneeregen","snow":"Schnee",
+                   "hail":"Hagel","thunderstorm":"Gewitter"}
+            for tag in sorted(tage)[1:4]:
+              hs = tage[tag]
+              temps = [s["temperature"] for s in hs if s.get("temperature") is not None]
+              dr = [s["pressure_msl"] for s in hs if s.get("pressure_msl") is not None]
+              ic = [s.get("icon") for s in hs if s.get("icon") and 7 <= int(s["timestamp"][11:13]) <= 20] or [s.get("icon") for s in hs if s.get("icon")]
+              haupt = max(set(ic), key=ic.count) if ic else None
+              d = datetime.strptime(tag, "%Y-%m-%d")
+              vorschau.append({"tag": wt[d.weekday()], "datum": d.strftime("%d.%m."), "wetter": txt.get(haupt, "Wechselhaft"),
+                               "tmin": round(min(temps)) if temps else None, "tmax": round(max(temps)) if temps else None,
+                               "druck": round(sum(dr)/len(dr)) if dr else None})
+          except Exception as e:
+            print("Vorschau nicht verfügbar:", e)
+
           # 4. biowetter.json schreiben
           data = {
             "datum": datum,
             "wetter": wetter_text,
             "temperatur": str(temp),
-            "tipp": tipp
+            "tipp": tipp,
+            "druck_hpa": druck_hpa,
+            "vorschau": vorschau
           }
           with open("biowetter.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
