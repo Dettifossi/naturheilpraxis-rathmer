@@ -185,3 +185,8 @@ html[data-farbe="nacht"] .bw-vorschau__kopf{color:#c9d6b8}
 .bw-vorschau__liste{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem}
 .bw-vorschau__tag b{font-weight:600}
 @media(max-width:700px){#bw-strip__inner{flex-wrap:wrap}.farbwahl.im-band{order:-1;margin-left:0;width:100%}}
+
+.bw-vorschau__tag{display:inline-flex;align-items:center;gap:.55rem}
+.bw-ico{flex:none;animation:bw-wink 5s ease-in-out infinite}
+@keyframes bw-wink{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@media (prefers-reduced-motion:reduce){.bw-ico{animation:none}}

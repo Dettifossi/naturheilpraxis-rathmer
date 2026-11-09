@@ -47,13 +47,25 @@ var LAB={"Vom Jurastudium zur Heilkunde":"Mein Weg","Das Enneagramm als diagnost
   fetch('https://www.verlagshausrathmer.com/apps.json').then(function(r){return r.json()}).then(function(d){var n=d.apps&&d.apps.length;if(!n)return;[].forEach.call(e,function(x){x.textContent=Z[n]||n})}).catch(function(){})})();
 
 /* Wettervorschau (nächste 3 Tage) und Luftdruck aus biowetter.json */
-(function(){var c=document.getElementById('bw-strip__content');if(!c||!window.fetch)return;
+(function(){
+  function cloud(f){return '<path d="M10 25h15a5 5 0 0 0 .6-10 7 7 0 0 0-13.5-1.4A5.5 5.5 0 0 0 10 25z" fill="'+f+'"/>'}
+  function ico(w){var t=(w||'').toLowerCase(),b='#7d8a8f',o='#c9812b';
+    var body;
+    if(t.indexOf('gewitter')>=0)body=cloud('#5f6b73')+'<path d="M19 22l-4 6h4l-2 5 6-8h-4l2-3z" fill="#e0a82e"/>';
+    else if(t.indexOf('schnee')>=0)body=cloud(b)+'<g fill="#5a8fb0"><circle cx="13" cy="29" r="1.6"/><circle cx="19" cy="31" r="1.6"/><circle cx="25" cy="29" r="1.6"/></g>';
+    else if(t.indexOf('nebel')>=0)body='<g stroke="'+b+'" stroke-width="2.4" stroke-linecap="round"><path d="M8 14h20M6 20h24M9 26h18"/></g>';
+    else if(t.indexOf('regen')>=0||t.indexOf('schauer')>=0||t.indexOf('hagel')>=0)body=cloud(b)+'<g stroke="#4a86b8" stroke-width="2" stroke-linecap="round"><path d="M12 28l-1.5 4M19 28l-1.5 4M26 28l-1.5 4"/></g>';
+    else if(t.indexOf('bedeckt')>=0)body=cloud(b);
+    else if(t.indexOf('teils')>=0||t.indexOf('wechsel')>=0||t.indexOf('wind')>=0)body='<circle cx="13" cy="13" r="5.5" fill="'+o+'"/><g stroke="'+o+'" stroke-width="2" stroke-linecap="round"><path d="M13 3v3M3 13h3M5.8 5.8l2 2M20.2 5.8l-2 2"/></g>'+cloud(b);
+    else body='<circle cx="18" cy="18" r="7" fill="'+o+'"/><g stroke="'+o+'" stroke-width="2.2" stroke-linecap="round"><path d="M18 4v4M18 28v4M4 18h4M28 18h4M8.1 8.1l2.8 2.8M25.1 25.1l2.8 2.8M8.1 27.9l2.8-2.8M25.1 10.9l2.8-2.8"/></g>';
+    return '<svg class="bw-ico" width="30" height="30" viewBox="0 0 36 36" aria-hidden="true">'+body+'</svg>'}
+var c=document.getElementById('bw-strip__content');if(!c||!window.fetch)return;
   fetch('biowetter.json?v='+Math.floor(Date.now()/3600000)).then(function(r){return r.json()}).then(function(d){
     var v=d.vorschau;if(!v||!v.length)return;
     var wrap=document.createElement('div');wrap.className='bw-vorschau';
     var kopf='<span class="bw-vorschau__kopf">Nächste Tage'+(d.druck_hpa?' · Luftdruck heute '+d.druck_hpa+' hPa':'')+'</span>';
     var chips=v.map(function(x){var t=(x.tmin!=null&&x.tmax!=null)?(x.tmin===x.tmax?x.tmax+'°':x.tmin+'–'+x.tmax+'°'):'';
-      return '<span class="bw-vorschau__tag"><b>'+x.tag+' '+x.datum+'</b> '+x.wetter+(t?', '+t:'')+(x.druck?' · '+x.druck+' hPa':'')+'</span>'}).join('');
+      return '<span class="bw-vorschau__tag">'+ico(x.wetter)+'<span><b>'+x.tag+' '+x.datum+'</b> '+x.wetter+(t?', '+t:'')+(x.druck?' · '+x.druck+' hPa':'')+'</span></span>'}).join('');
     wrap.innerHTML=kopf+'<span class="bw-vorschau__liste">'+chips+'</span>';
     var a=document.getElementById('bw-strip__author');if(a)a.parentNode.insertBefore(wrap,a.nextSibling);else c.appendChild(wrap);
   }).catch(function(){});
