@@ -190,3 +190,18 @@ html[data-farbe="nacht"] .bw-vorschau__kopf{color:#c9d6b8}
 .bw-ico{flex:none;animation:bw-wink 5s ease-in-out infinite}
 @keyframes bw-wink{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
 @media (prefers-reduced-motion:reduce){.bw-ico{animation:none}}
+/* ===== Handy: volle Breite nutzen, einspaltig ===== */
+@media(max-width:900px){
+  .botanical-split,.botanical-split--flip{grid-template-columns:1fr!important;gap:1.4rem!important}
+  .botanical-split__art{max-width:420px;margin:0 auto}
+  .prose p{max-width:none}
+  .prose .lead,.lead{font-size:1.35rem;line-height:1.4;max-width:none}
+  .container{padding-left:1.1rem;padding-right:1.1rem}
+  .section{padding-top:3rem;padding-bottom:3rem}
+  .sec-head{margin-bottom:1.8rem}
+  .cta-band{padding:1.8rem 1.2rem!important}
+  .section--olive{padding:3.2rem 0}
+  .hero{padding-top:1.5rem}
+  .hero__title{margin-bottom:1.2rem}
+  .farbzeile{padding:.6rem 1.1rem 0}
+}
