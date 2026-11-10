@@ -44,7 +44,7 @@ var LAB={"Vom Jurastudium zur Heilkunde":"Mein Weg","Das Enneagramm als diagnost
 /* Zahl der Apps aus der Liste des Verlags (Rückfall: Text im HTML bleibt) */
 (function(){var e=document.querySelectorAll('[data-app-zahl]');if(!e.length||!window.fetch)return;
   var Z=['null','eine','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn','elf','zwölf'];
-  fetch('https://www.verlagshausrathmer.com/apps.json').then(function(r){return r.json()}).then(function(d){var n=d.apps&&d.apps.length;if(!n)return;[].forEach.call(e,function(x){x.textContent=Z[n]||n})}).catch(function(){})})();
+  fetch('https://www.verlagshausrathmer.com/verknuepfungen.json').then(function(r){return r.json()}).then(function(d){var n=0;Object.keys(d.produkte||{}).forEach(function(k){var p=d.produkte[k];if(p.icon&&!p.extern)n++});if(!n)return;[].forEach.call(e,function(x){x.textContent=Z[n]||n})}).catch(function(){})})();
 
 /* Wettervorschau (nächste 3 Tage) und Luftdruck aus biowetter.json */
 (function(){
