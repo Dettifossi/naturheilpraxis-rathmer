@@ -1,33 +1,33 @@
 {
-  "datum": "09.11.2026",
-  "wetter": "Bedeckt",
-  "temperatur": "5",
-  "tipp": "Bei kühlem Wetter freut sich der Körper über wärmende Kräutertees: Ingwer, Zimt und Thymian gelten traditionell als erwärmend und kreislaufanregend. Ein Becher morgens nüchtern genossen kann den Start in den Tag erleichtern.",
-  "druck_hpa": 1015,
+  "datum": "10.11.2026",
+  "wetter": "Klarer Himmel",
+  "temperatur": "9",
+  "tipp": "Sonniges Wetter hebt die Stimmung und fördert die Serotoninbildung. Gleichzeitig ist es ein guter Zeitpunkt, Ballaststoffe, frisches Obst und Gemüse in die Ernährung zu integrieren – die Verdauung arbeitet bei Wärme oft lebhafter und kann saisonale Frischkost gut verarbeiten.",
+  "druck_hpa": 1014,
   "vorschau": [
-    {
-      "tag": "Di",
-      "datum": "10.11.",
-      "wetter": "Teils bewölkt",
-      "tmin": 1,
-      "tmax": 6,
-      "druck": 1013
-    },
     {
       "tag": "Mi",
       "datum": "11.11.",
       "wetter": "Bedeckt",
       "tmin": 3,
-      "tmax": 6,
+      "tmax": 5,
       "druck": 1004
     },
     {
       "tag": "Do",
       "datum": "12.11.",
-      "wetter": "Bedeckt",
-      "tmin": 5,
-      "tmax": 5,
-      "druck": 1002
+      "wetter": "Teils bewölkt",
+      "tmin": 2,
+      "tmax": 7,
+      "druck": 1001
+    },
+    {
+      "tag": "Fr",
+      "datum": "13.11.",
+      "wetter": "Teils bewölkt",
+      "tmin": 2,
+      "tmax": 2,
+      "druck": 1003
     }
   ]
 }
