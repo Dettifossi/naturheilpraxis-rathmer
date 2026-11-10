@@ -1,8 +1,8 @@
 {
   "datum": "10.11.2026",
   "wetter": "Klarer Himmel",
-  "temperatur": "9",
-  "tipp": "Sonniges Wetter hebt die Stimmung und fördert die Serotoninbildung. Gleichzeitig ist es ein guter Zeitpunkt, Ballaststoffe, frisches Obst und Gemüse in die Ernährung zu integrieren – die Verdauung arbeitet bei Wärme oft lebhafter und kann saisonale Frischkost gut verarbeiten.",
+  "temperatur": "2",
+  "tipp": "Kälte zieht sich zusammen – auch in der Muskulatur und in den Blutgefäßen. Wer zu Verspannungen oder kalten Händen und Füßen neigt, kann mit Rosmarinbädern oder einem wärmenden Fußbad die periphere Durchblutung anregen. Schüßler-Salz Nr. 7 (Magnesium phosphoricum) wird traditionell bei Kältekrämpfen eingesetzt.",
   "druck_hpa": 1014,
   "vorschau": [
     {
@@ -10,7 +10,7 @@
       "datum": "11.11.",
       "wetter": "Bedeckt",
       "tmin": 3,
-      "tmax": 5,
+      "tmax": 6,
       "druck": 1004
     },
     {
