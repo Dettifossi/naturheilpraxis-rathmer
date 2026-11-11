@@ -205,3 +205,7 @@ html[data-farbe="nacht"] .bw-vorschau__kopf{color:#c9d6b8}
   .hero__title{margin-bottom:1.2rem}
   .farbzeile{padding:.6rem 1.1rem 0}
 }
+
+/* Kein seitliches Wackeln: Seite lässt sich nicht nach links/rechts schieben */
+html,body{max-width:100%;overflow-x:hidden;overscroll-behavior-x:none}
+@supports (overflow:clip){html,body{overflow-x:clip}}

@@ -656,3 +656,7 @@ a, button, .btn { -webkit-tap-highlight-color: transparent; }
   .reveal { opacity: 1; transform: none; }
   .btn:active, .card:active, .info-card:active { transform: none; }
 }
+
+/* Kein seitliches Wackeln: Seite lässt sich nicht nach links/rechts schieben */
+html,body{max-width:100%;overflow-x:hidden;overscroll-behavior-x:none}
+@supports (overflow:clip){html,body{overflow-x:clip}}
