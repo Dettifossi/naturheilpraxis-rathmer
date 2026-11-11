@@ -1,22 +1,14 @@
 {
-  "datum": "10.11.2026",
-  "wetter": "Klarer Himmel",
-  "temperatur": "-1",
-  "tipp": "Kälte zieht sich zusammen – auch in der Muskulatur und in den Blutgefäßen. Wer zu Verspannungen oder kalten Händen und Füßen neigt, kann mit Rosmarinbädern oder einem wärmenden Fußbad die periphere Durchblutung anregen. Schüßler-Salz Nr. 7 (Magnesium phosphoricum) wird traditionell bei Kältekrämpfen eingesetzt.",
-  "druck_hpa": 1014,
+  "datum": "11.11.2026",
+  "wetter": "Bedeckt",
+  "temperatur": "3",
+  "tipp": "An kühlen Tagen braucht der Körper etwas mehr Energie für die Wärmeregulation. Warme, leicht verdauliche Mahlzeiten – Suppen, gedünstetes Wurzelgemüse, Hirse oder Hafer – unterstützen den Organismus besser als Rohkost, die bei Kälte mehr Verdauungsenergie kostet.",
+  "druck_hpa": 1004,
   "vorschau": [
-    {
-      "tag": "Mi",
-      "datum": "11.11.",
-      "wetter": "Bedeckt",
-      "tmin": 3,
-      "tmax": 6,
-      "druck": 1004
-    },
     {
       "tag": "Do",
       "datum": "12.11.",
-      "wetter": "Teils bewölkt",
+      "wetter": "Bedeckt",
       "tmin": 2,
       "tmax": 7,
       "druck": 1001
@@ -26,8 +18,16 @@
       "datum": "13.11.",
       "wetter": "Teils bewölkt",
       "tmin": 2,
-      "tmax": 2,
-      "druck": 1003
+      "tmax": 8,
+      "druck": 1011
+    },
+    {
+      "tag": "Sa",
+      "datum": "14.11.",
+      "wetter": "Teils bewölkt",
+      "tmin": 3,
+      "tmax": 3,
+      "druck": 1019
     }
   ]
 }
