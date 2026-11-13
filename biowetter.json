@@ -1,33 +1,33 @@
 {
-  "datum": "12.11.2026",
+  "datum": "13.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "-1",
-  "tipp": "Kühle Temperaturen sind ein bewährter Trainingsreiz für das Immunsystem – wenn man sie dosiert nutzt. Wechselduschen nach Kneipp, beginnend warm und endend kühl, können die Durchblutung und die körpereigene Abwehr unterstützen. Wichtig: Im Anschluss gut aufwärmen.",
-  "druck_hpa": 1002,
+  "temperatur": "7",
+  "tipp": "Herbstzeit ist Pilz- und Wurzelgemüsezeit – und das ist kein Zufall. Kürbis, Pastinake, Karotten und Rote Bete liefern Mineralstoffe, Ballaststoffe und sekundäre Pflanzenstoffe, die den Körper auf die Wintermonate vorbereiten. Gegarte Wurzelgemüse sind leicht verdaulich und wärmend.",
+  "druck_hpa": 1012,
   "vorschau": [
-    {
-      "tag": "Fr",
-      "datum": "13.11.",
-      "wetter": "Teils bewölkt",
-      "tmin": 2,
-      "tmax": 8,
-      "druck": 1011
-    },
     {
       "tag": "Sa",
       "datum": "14.11.",
       "wetter": "Teils bewölkt",
       "tmin": 1,
       "tmax": 7,
-      "druck": 1018
+      "druck": 1019
     },
     {
       "tag": "So",
       "datum": "15.11.",
-      "wetter": "Teils bewölkt",
+      "wetter": "Bedeckt",
       "tmin": 1,
-      "tmax": 1,
-      "druck": 1013
+      "tmax": 10,
+      "druck": 1005
+    },
+    {
+      "tag": "Mo",
+      "datum": "16.11.",
+      "wetter": "Bedeckt",
+      "tmin": 10,
+      "tmax": 10,
+      "druck": 996
     }
   ]
 }
