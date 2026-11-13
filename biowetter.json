@@ -1,9 +1,9 @@
 {
   "datum": "13.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "7",
-  "tipp": "Herbstzeit ist Pilz- und Wurzelgemüsezeit – und das ist kein Zufall. Kürbis, Pastinake, Karotten und Rote Bete liefern Mineralstoffe, Ballaststoffe und sekundäre Pflanzenstoffe, die den Körper auf die Wintermonate vorbereiten. Gegarte Wurzelgemüse sind leicht verdaulich und wärmend.",
-  "druck_hpa": 1012,
+  "temperatur": "3",
+  "tipp": "Bei kühlem Wetter freut sich der Körper über wärmende Kräutertees: Ingwer, Zimt und Thymian gelten traditionell als erwärmend und kreislaufanregend. Ein Becher morgens nüchtern genossen kann den Start in den Tag erleichtern.",
+  "druck_hpa": 1016,
   "vorschau": [
     {
       "tag": "Sa",
@@ -24,10 +24,10 @@
     {
       "tag": "Mo",
       "datum": "16.11.",
-      "wetter": "Bedeckt",
+      "wetter": "Regen",
       "tmin": 10,
       "tmax": 10,
-      "druck": 996
+      "druck": 995
     }
   ]
 }
