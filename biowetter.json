@@ -1,33 +1,33 @@
 {
-  "datum": "13.11.2026",
-  "wetter": "Teils bewölkt",
-  "temperatur": "4",
-  "tipp": "Bei kühlem Wetter freut sich der Körper über wärmende Kräutertees: Ingwer, Zimt und Thymian gelten traditionell als erwärmend und kreislaufanregend. Ein Becher morgens nüchtern genossen kann den Start in den Tag erleichtern.",
-  "druck_hpa": 1018,
+  "datum": "14.11.2026",
+  "wetter": "Klarer Himmel",
+  "temperatur": "7",
+  "tipp": "Der Herbst ist die Zeit, das Immunsystem zu stärken – bevor der Winter kommt. Zink aus Kürbiskernen und Hülsenfrüchten, Vitamin C aus Sanddorn und Hagebutte sowie regelmäßige Bewegung an der frischen Luft sind bewährte naturheilkundliche Begleiter in dieser Übergangszeit.",
+  "druck_hpa": 1022,
   "vorschau": [
-    {
-      "tag": "Sa",
-      "datum": "14.11.",
-      "wetter": "Teils bewölkt",
-      "tmin": 1,
-      "tmax": 7,
-      "druck": 1019
-    },
     {
       "tag": "So",
       "datum": "15.11.",
       "wetter": "Bedeckt",
-      "tmin": 1,
+      "tmin": 0,
       "tmax": 10,
       "druck": 1005
     },
     {
       "tag": "Mo",
       "datum": "16.11.",
-      "wetter": "Regen",
-      "tmin": 10,
+      "wetter": "Bedeckt",
+      "tmin": 4,
       "tmax": 10,
-      "druck": 995
+      "druck": 1001
+    },
+    {
+      "tag": "Di",
+      "datum": "17.11.",
+      "wetter": "Bedeckt",
+      "tmin": 4,
+      "tmax": 4,
+      "druck": 1004
     }
   ]
 }
