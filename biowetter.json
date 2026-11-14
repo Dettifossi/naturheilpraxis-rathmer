@@ -1,15 +1,15 @@
 {
   "datum": "14.11.2026",
   "wetter": "Klarer Himmel",
-  "temperatur": "3",
+  "temperatur": "-2",
   "tipp": "Kälte zieht sich zusammen – auch in der Muskulatur und in den Blutgefäßen. Wer zu Verspannungen oder kalten Händen und Füßen neigt, kann mit Rosmarinbädern oder einem wärmenden Fußbad die periphere Durchblutung anregen. Schüßler-Salz Nr. 7 (Magnesium phosphoricum) wird traditionell bei Kältekrämpfen eingesetzt.",
-  "druck_hpa": 1021,
+  "druck_hpa": 1020,
   "vorschau": [
     {
       "tag": "So",
       "datum": "15.11.",
       "wetter": "Bedeckt",
-      "tmin": -1,
+      "tmin": 0,
       "tmax": 10,
       "druck": 1006
     },
