@@ -756,7 +756,7 @@
       btn.addEventListener('click', function () {
         if (audio && !audio.paused) { audio.pause(); audio.currentTime = 0; ui(false); return; }
         try {
-          audio = new Audio('assets/sounds/willkommen.mp3');
+          audio = new Audio('assets/sounds/willkommen.mp3?v=2');
           audio.addEventListener('ended', function () { ui(false); });
           audio.play().then(function () { ui(true); }).catch(function () { ui(false); });
         } catch (e) { ui(false); }
