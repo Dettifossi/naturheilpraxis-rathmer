@@ -1,16 +1,16 @@
 {
   "datum": "15.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "3",
-  "tipp": "An kühlen Tagen braucht der Körper etwas mehr Energie für die Wärmeregulation. Warme, leicht verdauliche Mahlzeiten – Suppen, gedünstetes Wurzelgemüse, Hirse oder Hafer – unterstützen den Organismus besser als Rohkost, die bei Kälte mehr Verdauungsenergie kostet.",
-  "druck_hpa": 1010,
+  "temperatur": "6",
+  "tipp": "Wenn die Tage kürzer werden, verändert sich der Serotoninhaushalt spürbar. Regelmäßige Bewegung im Tageslicht – auch wenn es grau ist – und eine tryptophanreiche Ernährung (Nüsse, Käse, Bananen, Hülsenfrüchte) können helfen, Stimmung und Schlaf zu stabilisieren.",
+  "druck_hpa": 1008,
   "vorschau": [
     {
       "tag": "Mo",
       "datum": "16.11.",
       "wetter": "Bedeckt",
-      "tmin": 5,
-      "tmax": 10,
+      "tmin": 4,
+      "tmax": 9,
       "druck": 1000
     },
     {
@@ -18,16 +18,16 @@
       "datum": "17.11.",
       "wetter": "Regen",
       "tmin": 3,
-      "tmax": 8,
-      "druck": 989
+      "tmax": 9,
+      "druck": 990
     },
     {
       "tag": "Mi",
       "datum": "18.11.",
-      "wetter": "Bedeckt",
-      "tmin": 8,
-      "tmax": 8,
-      "druck": 985
+      "wetter": "Regen",
+      "tmin": 9,
+      "tmax": 9,
+      "druck": 984
     }
   ]
 }
