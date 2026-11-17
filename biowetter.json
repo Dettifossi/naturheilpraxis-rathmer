@@ -3,7 +3,7 @@
   "wetter": "Bedeckt",
   "temperatur": "12",
   "tipp": "Wetterfühligkeit ist keine Einbildung – der Körper reagiert messbar auf Luftdruckveränderungen. Schüßler-Salz Nr. 5 (Kalium phosphoricum) wird traditionell bei Erschöpfung und Reizbarkeit im Zusammenhang mit Wettereinflüssen eingesetzt. Ausreichend Schlaf ist in diesen Phasen besonders wichtig.",
-  "druck_hpa": 986,
+  "druck_hpa": 982,
   "vorschau": [
     {
       "tag": "Mi",
@@ -11,14 +11,14 @@
       "wetter": "Bedeckt",
       "tmin": 8,
       "tmax": 10,
-      "druck": 985
+      "druck": 984
     },
     {
       "tag": "Do",
       "datum": "19.11.",
-      "wetter": "Bedeckt",
-      "tmin": 6,
-      "tmax": 9,
+      "wetter": "Regen",
+      "tmin": 7,
+      "tmax": 10,
       "druck": 989
     },
     {
@@ -27,7 +27,7 @@
       "wetter": "Bedeckt",
       "tmin": 6,
       "tmax": 6,
-      "druck": 996
+      "druck": 995
     }
   ]
 }
