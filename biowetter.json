@@ -1,16 +1,16 @@
 {
   "datum": "18.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "11",
+  "temperatur": "8",
   "tipp": "Bei fallendem Luftdruck weiten sich Blutgefäße leicht – was manche als dumpfen Kopfdruck erleben. Ein kühles Tuch im Nacken, frische Luft und Entspannungsübungen wie Bauchatmung oder Yoga können den Druckausgleich im Körper unterstützen.",
-  "druck_hpa": 984,
+  "druck_hpa": 990,
   "vorschau": [
     {
       "tag": "Do",
       "datum": "19.11.",
-      "wetter": "Regen",
+      "wetter": "Bedeckt",
       "tmin": 7,
-      "tmax": 9,
+      "tmax": 10,
       "druck": 989
     },
     {
