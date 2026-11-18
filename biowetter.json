@@ -1,33 +1,33 @@
 {
-  "datum": "17.11.2026",
+  "datum": "18.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "12",
-  "tipp": "Wetterfühligkeit ist keine Einbildung – der Körper reagiert messbar auf Luftdruckveränderungen. Schüßler-Salz Nr. 5 (Kalium phosphoricum) wird traditionell bei Erschöpfung und Reizbarkeit im Zusammenhang mit Wettereinflüssen eingesetzt. Ausreichend Schlaf ist in diesen Phasen besonders wichtig.",
-  "druck_hpa": 982,
+  "temperatur": "11",
+  "tipp": "Bei fallendem Luftdruck weiten sich Blutgefäße leicht – was manche als dumpfen Kopfdruck erleben. Ein kühles Tuch im Nacken, frische Luft und Entspannungsübungen wie Bauchatmung oder Yoga können den Druckausgleich im Körper unterstützen.",
+  "druck_hpa": 984,
   "vorschau": [
-    {
-      "tag": "Mi",
-      "datum": "18.11.",
-      "wetter": "Bedeckt",
-      "tmin": 8,
-      "tmax": 10,
-      "druck": 984
-    },
     {
       "tag": "Do",
       "datum": "19.11.",
       "wetter": "Regen",
       "tmin": 7,
-      "tmax": 10,
+      "tmax": 9,
       "druck": 989
     },
     {
       "tag": "Fr",
       "datum": "20.11.",
       "wetter": "Bedeckt",
-      "tmin": 6,
-      "tmax": 6,
-      "druck": 995
+      "tmin": 2,
+      "tmax": 7,
+      "druck": 1001
+    },
+    {
+      "tag": "Sa",
+      "datum": "21.11.",
+      "wetter": "Teils bewölkt",
+      "tmin": 2,
+      "tmax": 2,
+      "druck": 1010
     }
   ]
 }
