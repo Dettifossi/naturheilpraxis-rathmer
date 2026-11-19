@@ -1,24 +1,16 @@
 {
-  "datum": "18.11.2026",
+  "datum": "19.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "8",
-  "tipp": "Bei fallendem Luftdruck weiten sich Blutgefäße leicht – was manche als dumpfen Kopfdruck erleben. Ein kühles Tuch im Nacken, frische Luft und Entspannungsübungen wie Bauchatmung oder Yoga können den Druckausgleich im Körper unterstützen.",
-  "druck_hpa": 992,
+  "temperatur": "11",
+  "tipp": "Tiefdruckwetter geht häufig mit erhöhter Schmerzempfindlichkeit einher – besonders bei Menschen mit Rheuma oder alten Verletzungen. Wärme ist dann ein treuer Begleiter: Wärmflasche, warmes Bad oder ein wärmender Umschlag mit Heublumen können die Muskulatur entspannen.",
+  "druck_hpa": 989,
   "vorschau": [
-    {
-      "tag": "Do",
-      "datum": "19.11.",
-      "wetter": "Regen",
-      "tmin": 7,
-      "tmax": 10,
-      "druck": 989
-    },
     {
       "tag": "Fr",
       "datum": "20.11.",
       "wetter": "Bedeckt",
-      "tmin": 2,
-      "tmax": 7,
+      "tmin": 1,
+      "tmax": 6,
       "druck": 1001
     },
     {
@@ -26,8 +18,16 @@
       "datum": "21.11.",
       "wetter": "Teils bewölkt",
       "tmin": 1,
-      "tmax": 1,
-      "druck": 1010
+      "tmax": 6,
+      "druck": 1017
+    },
+    {
+      "tag": "So",
+      "datum": "22.11.",
+      "wetter": "Teils bewölkt",
+      "tmin": 2,
+      "tmax": 2,
+      "druck": 1017
     }
   ]
 }
