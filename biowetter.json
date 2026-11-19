@@ -1,9 +1,9 @@
 {
   "datum": "19.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "11",
+  "temperatur": "9",
   "tipp": "Tiefdruckwetter geht häufig mit erhöhter Schmerzempfindlichkeit einher – besonders bei Menschen mit Rheuma oder alten Verletzungen. Wärme ist dann ein treuer Begleiter: Wärmflasche, warmes Bad oder ein wärmender Umschlag mit Heublumen können die Muskulatur entspannen.",
-  "druck_hpa": 989,
+  "druck_hpa": 990,
   "vorschau": [
     {
       "tag": "Fr",
@@ -11,7 +11,7 @@
       "wetter": "Bedeckt",
       "tmin": 1,
       "tmax": 6,
-      "druck": 1001
+      "druck": 1002
     },
     {
       "tag": "Sa",
