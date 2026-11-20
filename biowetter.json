@@ -1,18 +1,10 @@
 {
-  "datum": "19.11.2026",
+  "datum": "20.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "9",
-  "tipp": "Tiefdruckwetter geht häufig mit erhöhter Schmerzempfindlichkeit einher – besonders bei Menschen mit Rheuma oder alten Verletzungen. Wärme ist dann ein treuer Begleiter: Wärmflasche, warmes Bad oder ein wärmender Umschlag mit Heublumen können die Muskulatur entspannen.",
-  "druck_hpa": 993,
+  "temperatur": "6",
+  "tipp": "Sinkender Luftdruck – oft spürbar als Schwere im Kopf, Müdigkeit oder Gelenksschmerzen – ist ein Zeichen für den Körper, auf sich zu achten. Weniger Koffein, mehr Wasser und leichte Bewegung in ruhigem Tempo können helfen, die Anpassungsphase gut zu überbrücken.",
+  "druck_hpa": 1001,
   "vorschau": [
-    {
-      "tag": "Fr",
-      "datum": "20.11.",
-      "wetter": "Bedeckt",
-      "tmin": 1,
-      "tmax": 6,
-      "druck": 1002
-    },
     {
       "tag": "Sa",
       "datum": "21.11.",
@@ -25,9 +17,17 @@
       "tag": "So",
       "datum": "22.11.",
       "wetter": "Teils bewölkt",
-      "tmin": 2,
-      "tmax": 2,
-      "druck": 1016
+      "tmin": 0,
+      "tmax": 3,
+      "druck": 1014
+    },
+    {
+      "tag": "Mo",
+      "datum": "23.11.",
+      "wetter": "Teils bewölkt",
+      "tmin": 0,
+      "tmax": 0,
+      "druck": 1018
     }
   ]
 }
