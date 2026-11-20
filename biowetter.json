@@ -1,9 +1,9 @@
 {
   "datum": "20.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "6",
-  "tipp": "Sinkender Luftdruck – oft spürbar als Schwere im Kopf, Müdigkeit oder Gelenksschmerzen – ist ein Zeichen für den Körper, auf sich zu achten. Weniger Koffein, mehr Wasser und leichte Bewegung in ruhigem Tempo können helfen, die Anpassungsphase gut zu überbrücken.",
-  "druck_hpa": 1001,
+  "temperatur": "5",
+  "tipp": "Kühle Temperaturen sind ein bewährter Trainingsreiz für das Immunsystem – wenn man sie dosiert nutzt. Wechselduschen nach Kneipp, beginnend warm und endend kühl, können die Durchblutung und die körpereigene Abwehr unterstützen. Wichtig: Im Anschluss gut aufwärmen.",
+  "druck_hpa": 1005,
   "vorschau": [
     {
       "tag": "Sa",
@@ -18,7 +18,7 @@
       "datum": "22.11.",
       "wetter": "Teils bewölkt",
       "tmin": 0,
-      "tmax": 3,
+      "tmax": 4,
       "druck": 1014
     },
     {
