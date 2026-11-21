@@ -1,14 +1,14 @@
 {
   "datum": "21.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "5",
+  "temperatur": "1",
   "tipp": "Bei kühlem Wetter freut sich der Körper über wärmende Kräutertees: Ingwer, Zimt und Thymian gelten traditionell als erwärmend und kreislaufanregend. Ein Becher morgens nüchtern genossen kann den Start in den Tag erleichtern.",
-  "druck_hpa": 1019,
+  "druck_hpa": 1018,
   "vorschau": [
     {
       "tag": "So",
       "datum": "22.11.",
-      "wetter": "Bedeckt",
+      "wetter": "Teils bewölkt",
       "tmin": 0,
       "tmax": 4,
       "druck": 1014
@@ -18,15 +18,15 @@
       "datum": "23.11.",
       "wetter": "Teils bewölkt",
       "tmin": -2,
-      "tmax": 3,
+      "tmax": 2,
       "druck": 1025
     },
     {
       "tag": "Di",
       "datum": "24.11.",
       "wetter": "Teils bewölkt",
-      "tmin": -1,
-      "tmax": -1,
+      "tmin": -2,
+      "tmax": -2,
       "druck": 1029
     }
   ]
