@@ -1,17 +1,17 @@
 {
   "datum": "22.11.2026",
-  "wetter": "Teils bewölkt",
-  "temperatur": "6",
-  "tipp": "Herbstzeit ist Pilz- und Wurzelgemüsezeit – und das ist kein Zufall. Kürbis, Pastinake, Karotten und Rote Bete liefern Mineralstoffe, Ballaststoffe und sekundäre Pflanzenstoffe, die den Körper auf die Wintermonate vorbereiten. Gegarte Wurzelgemüse sind leicht verdaulich und wärmend.",
-  "druck_hpa": 1012,
+  "wetter": "Klarer Himmel",
+  "temperatur": "1",
+  "tipp": "Kälte zieht sich zusammen – auch in der Muskulatur und in den Blutgefäßen. Wer zu Verspannungen oder kalten Händen und Füßen neigt, kann mit Rosmarinbädern oder einem wärmenden Fußbad die periphere Durchblutung anregen. Schüßler-Salz Nr. 7 (Magnesium phosphoricum) wird traditionell bei Kältekrämpfen eingesetzt.",
+  "druck_hpa": 1013,
   "vorschau": [
     {
       "tag": "Mo",
       "datum": "23.11.",
       "wetter": "Teils bewölkt",
-      "tmin": -2,
-      "tmax": 2,
-      "druck": 1025
+      "tmin": -3,
+      "tmax": 3,
+      "druck": 1024
     },
     {
       "tag": "Di",
