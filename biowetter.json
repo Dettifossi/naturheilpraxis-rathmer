@@ -1,18 +1,10 @@
 {
-  "datum": "21.11.2026",
-  "wetter": "Bedeckt",
-  "temperatur": "3",
-  "tipp": "Bei kühlem Wetter freut sich der Körper über wärmende Kräutertees: Ingwer, Zimt und Thymian gelten traditionell als erwärmend und kreislaufanregend. Ein Becher morgens nüchtern genossen kann den Start in den Tag erleichtern.",
-  "druck_hpa": 1018,
+  "datum": "22.11.2026",
+  "wetter": "Teils bewölkt",
+  "temperatur": "6",
+  "tipp": "Herbstzeit ist Pilz- und Wurzelgemüsezeit – und das ist kein Zufall. Kürbis, Pastinake, Karotten und Rote Bete liefern Mineralstoffe, Ballaststoffe und sekundäre Pflanzenstoffe, die den Körper auf die Wintermonate vorbereiten. Gegarte Wurzelgemüse sind leicht verdaulich und wärmend.",
+  "druck_hpa": 1012,
   "vorschau": [
-    {
-      "tag": "So",
-      "datum": "22.11.",
-      "wetter": "Teils bewölkt",
-      "tmin": 0,
-      "tmax": 4,
-      "druck": 1014
-    },
     {
       "tag": "Mo",
       "datum": "23.11.",
@@ -25,9 +17,17 @@
       "tag": "Di",
       "datum": "24.11.",
       "wetter": "Teils bewölkt",
+      "tmin": -4,
+      "tmax": 2,
+      "druck": 1026
+    },
+    {
+      "tag": "Mi",
+      "datum": "25.11.",
+      "wetter": "Teils bewölkt",
       "tmin": -2,
       "tmax": -2,
-      "druck": 1029
+      "druck": 1022
     }
   ]
 }
