@@ -1,32 +1,32 @@
 {
   "datum": "23.11.2026",
-  "wetter": "Klarer Himmel",
-  "temperatur": "2",
+  "wetter": "Bedeckt",
+  "temperatur": "-2",
   "tipp": "An kühlen Tagen braucht der Körper etwas mehr Energie für die Wärmeregulation. Warme, leicht verdauliche Mahlzeiten – Suppen, gedünstetes Wurzelgemüse, Hirse oder Hafer – unterstützen den Organismus besser als Rohkost, die bei Kälte mehr Verdauungsenergie kostet.",
-  "druck_hpa": 1025,
+  "druck_hpa": 1028,
   "vorschau": [
     {
       "tag": "Di",
       "datum": "24.11.",
       "wetter": "Teils bewölkt",
-      "tmin": -3,
-      "tmax": 2,
+      "tmin": -2,
+      "tmax": 3,
       "druck": 1026
     },
     {
       "tag": "Mi",
       "datum": "25.11.",
       "wetter": "Teils bewölkt",
-      "tmin": -3,
+      "tmin": -2,
       "tmax": 1,
-      "druck": 1020
+      "druck": 1019
     },
     {
       "tag": "Do",
       "datum": "26.11.",
       "wetter": "Teils bewölkt",
-      "tmin": -3,
-      "tmax": -3,
+      "tmin": -2,
+      "tmax": -2,
       "druck": 1020
     }
   ]
