@@ -1,9 +1,9 @@
 {
   "datum": "24.11.2026",
-  "wetter": "Bedeckt",
-  "temperatur": "-1",
+  "wetter": "Teils bewölkt",
+  "temperatur": "1",
   "tipp": "Kühle Temperaturen sind ein bewährter Trainingsreiz für das Immunsystem – wenn man sie dosiert nutzt. Wechselduschen nach Kneipp, beginnend warm und endend kühl, können die Durchblutung und die körpereigene Abwehr unterstützen. Wichtig: Im Anschluss gut aufwärmen.",
-  "druck_hpa": 1028,
+  "druck_hpa": 1026,
   "vorschau": [
     {
       "tag": "Mi",
@@ -18,8 +18,8 @@
       "datum": "26.11.",
       "wetter": "Teils bewölkt",
       "tmin": -3,
-      "tmax": -1,
-      "druck": 1021
+      "tmax": 0,
+      "druck": 1022
     },
     {
       "tag": "Fr",
@@ -27,7 +27,7 @@
       "wetter": "Teils bewölkt",
       "tmin": -3,
       "tmax": -3,
-      "druck": 1023
+      "druck": 1024
     }
   ]
 }
