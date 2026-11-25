@@ -1,9 +1,9 @@
 {
   "datum": "25.11.2026",
-  "wetter": "Klarer Himmel",
-  "temperatur": "-5",
-  "tipp": "An Frosttagen ist die Versuchung groß, sich wenig zu bewegen. Dabei ist moderates Gehen an der frischen Luft – warm gekleidet und gut bedeckt – einer der wirksamsten Impulse für Durchblutung, Immunsystem und Stimmung. Schon 20 Minuten täglich machen einen spürbaren Unterschied.",
-  "druck_hpa": 1024,
+  "wetter": "Bedeckt",
+  "temperatur": "0",
+  "tipp": "Bei kühlem Wetter freut sich der Körper über wärmende Kräutertees: Ingwer, Zimt und Thymian gelten traditionell als erwärmend und kreislaufanregend. Ein Becher morgens nüchtern genossen kann den Start in den Tag erleichtern.",
+  "druck_hpa": 1020,
   "vorschau": [
     {
       "tag": "Do",
@@ -19,7 +19,7 @@
       "wetter": "Teils bewölkt",
       "tmin": -4,
       "tmax": 0,
-      "druck": 1026
+      "druck": 1027
     },
     {
       "tag": "Sa",
