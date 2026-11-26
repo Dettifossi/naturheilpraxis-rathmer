@@ -1,24 +1,16 @@
 {
-  "datum": "25.11.2026",
+  "datum": "26.11.2026",
   "wetter": "Bedeckt",
   "temperatur": "-1",
-  "tipp": "Bei kühlem Wetter freut sich der Körper über wärmende Kräutertees: Ingwer, Zimt und Thymian gelten traditionell als erwärmend und kreislaufanregend. Ein Becher morgens nüchtern genossen kann den Start in den Tag erleichtern.",
+  "tipp": "Kälte zieht sich zusammen – auch in der Muskulatur und in den Blutgefäßen. Wer zu Verspannungen oder kalten Händen und Füßen neigt, kann mit Rosmarinbädern oder einem wärmenden Fußbad die periphere Durchblutung anregen. Schüßler-Salz Nr. 7 (Magnesium phosphoricum) wird traditionell bei Kältekrämpfen eingesetzt.",
   "druck_hpa": 1021,
   "vorschau": [
-    {
-      "tag": "Do",
-      "datum": "26.11.",
-      "wetter": "Teils bewölkt",
-      "tmin": -3,
-      "tmax": 0,
-      "druck": 1022
-    },
     {
       "tag": "Fr",
       "datum": "27.11.",
       "wetter": "Teils bewölkt",
       "tmin": -4,
-      "tmax": -1,
+      "tmax": 0,
       "druck": 1026
     },
     {
@@ -26,8 +18,16 @@
       "datum": "28.11.",
       "wetter": "Teils bewölkt",
       "tmin": -4,
-      "tmax": -4,
-      "druck": 1030
+      "tmax": 1,
+      "druck": 1029
+    },
+    {
+      "tag": "So",
+      "datum": "29.11.",
+      "wetter": "Bedeckt",
+      "tmin": 0,
+      "tmax": 0,
+      "druck": 1026
     }
   ]
 }
