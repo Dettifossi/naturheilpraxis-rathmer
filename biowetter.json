@@ -1,18 +1,10 @@
 {
-  "datum": "27.11.2026",
+  "datum": "28.11.2026",
   "wetter": "Bedeckt",
-  "temperatur": "-1",
-  "tipp": "An kühlen Tagen braucht der Körper etwas mehr Energie für die Wärmeregulation. Warme, leicht verdauliche Mahlzeiten – Suppen, gedünstetes Wurzelgemüse, Hirse oder Hafer – unterstützen den Organismus besser als Rohkost, die bei Kälte mehr Verdauungsenergie kostet.",
-  "druck_hpa": 1032,
+  "temperatur": "0",
+  "tipp": "Kühle Temperaturen sind ein bewährter Trainingsreiz für das Immunsystem – wenn man sie dosiert nutzt. Wechselduschen nach Kneipp, beginnend warm und endend kühl, können die Durchblutung und die körpereigene Abwehr unterstützen. Wichtig: Im Anschluss gut aufwärmen.",
+  "druck_hpa": 1033,
   "vorschau": [
-    {
-      "tag": "Sa",
-      "datum": "28.11.",
-      "wetter": "Teils bewölkt",
-      "tmin": -4,
-      "tmax": 1,
-      "druck": 1030
-    },
     {
       "tag": "So",
       "datum": "29.11.",
@@ -25,9 +17,17 @@
       "tag": "Mo",
       "datum": "30.11.",
       "wetter": "Bedeckt",
+      "tmin": 1,
+      "tmax": 4,
+      "druck": 1029
+    },
+    {
+      "tag": "Di",
+      "datum": "01.12.",
+      "wetter": "Teils bewölkt",
       "tmin": 2,
       "tmax": 2,
-      "druck": 1028
+      "druck": 1030
     }
   ]
 }
